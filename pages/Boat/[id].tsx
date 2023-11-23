@@ -11,6 +11,7 @@ import Header from "@/Component/Header";
 import { User } from "../Users";
 import styles2 from "../../styles/Users.module.css";
 import { Button } from "react-bootstrap";
+import ApiLink from "../api/ApiLink";
 
 interface BoatDetailProps {
   boat: Boat; // Define your Boat interface here
@@ -21,7 +22,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
-  }
+  } 
   return (
     <>
       <Head>
@@ -96,9 +97,9 @@ const Owners: React.FC<{ users: User[] }> = ({ users }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id }: any = params;
-  const res = await fetch(`http://localhost:3005/Boats/${id}`);
+  const res = await fetch(`${ApiLink}/Boats/${id}`);
   const boat: Boat = await res.json();
-  let urlForUsers: string = "http://localhost:3005/Users?";
+  let urlForUsers: string = `${ApiLink}/Users?`;
   boat.OwnersUserId.map((id, index) => {
     let addAnd: boolean = boat.OwnersUserId.length - 1 !== index;
     let contentToAdd: string = "id=" + id + (addAnd ? "&" : "");
@@ -106,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   });
   let userRes: any;
   let users: User[] = [];
-  if (urlForUsers !== "http://localhost:3005/Users?") {
+  if (urlForUsers !== `${ApiLink}/Users?`) {
     userRes = await fetch(urlForUsers);
     users = await userRes.json();
   }

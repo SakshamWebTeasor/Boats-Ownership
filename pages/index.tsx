@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import Link from "next/link";
+import ApiLink from "./api/ApiLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async (
   context
 ) => {
   const res = await fetch("https://api.ipify.org?format=json");
-  const BoatsImage = await fetch("http://localhost:3005/BoatsImage");
+  const BoatsImage = await fetch(`${ApiLink}/BoatsImage`);
   const data = await res.json();
   const boatsImg: string[] = await BoatsImage.json();
   const repo = { ...data, boatsImg };
@@ -26,8 +27,6 @@ export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async (
 export default function Home({
   repo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log("repo", repo.boatsImg?.length);
-
   return (
     <>
       <Head>

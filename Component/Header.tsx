@@ -11,14 +11,21 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
         style={{ position: "relative" }}
         className="d-flex justify-content-between"
       >
-        <Button type="button" className="btn btn-dark mb-3 ">
+        <Button
+          type="button"
+          className="btn btn-dark mb-3 "
+          onClick={() => window.history.back()}
+        >
+          &lt;
+        </Button>
+        {/* <Button type="button" className="btn btn-dark mb-3 ">
           <Link
             href={`/${PrePage == "Home" ? "" : PrePage}`}
             style={{ color: "white", textDecoration: "none" }}
           >
-            &lt; &nbsp;Back To {PrePage}
+            {PrePage}
           </Link>
-        </Button>
+        </Button> */}
         {Page !== "" && (
           <div className="SM-Font DSM-None">
             {Page == "About" ? "About Us" : `Our ${Page}`}
@@ -38,7 +45,7 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
         </div>
       </div>
       <div className="DSM-Block-F">
-      {Page !== "" && (
+        {Page !== "" && (
           <div className="SM-Font">
             {Page == "About" ? "About Us" : `Our ${Page}`}
           </div>

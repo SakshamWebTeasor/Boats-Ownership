@@ -49,7 +49,7 @@ npm i -g json-server
 A File BoatCoowner.json is stored in */DB* directory
 All Api's are integrated in this PWA using port *3005*.
 
-Use Following after going Command to 
+Use Following after going Command to start
 ```
 json-server --watch -p 3005 Boatcoowner.json
 ```

@@ -11,6 +11,7 @@ import Header from "@/Component/Header";
 import { User } from "../Users";
 import styles2 from "../../styles/Users.module.css";
 import { Button } from "react-bootstrap";
+import ApiLink from "../api/ApiLink";
 
 interface UserDetailProps {
   boats: Boat[]; // Define your Boat interface here
@@ -98,9 +99,9 @@ const OwnedBoats: React.FC<UserDetailProps> = ({ boats, user }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id }: any = params;
-  const res = await fetch(`http://localhost:3005/Users/${id}`);
+  const res = await fetch(`${ApiLink}/Users/${id}`);
   const user: User = await res.json();
-  let fetchAllBoats: string = "http://localhost:3005/Boats";
+  let fetchAllBoats: string = `${ApiLink}/Boats`;
   const allBoatsRes = await fetch(fetchAllBoats);
   const allBoats: Boat[] = await allBoatsRes.json();
   let userBoats: Boat[] = [];

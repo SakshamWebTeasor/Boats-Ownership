@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Boat } from "./Boats";
 import Header from "@/Component/Header";
 import { Button } from "react-bootstrap";
+import ApiLink from "./api/ApiLink";
 
 export interface User {
   id: number;
@@ -86,9 +87,9 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3005/Users");
+  const res = await fetch(`${ApiLink}/Users`);
   const users: User[] = await res.json();
-  const boatRes = await fetch("http://localhost:3005/Boats");
+  const boatRes = await fetch(`${ApiLink}/Boats`);
   const boats: Boat[] = await boatRes.json();
   return {
     props: { users, boats },
