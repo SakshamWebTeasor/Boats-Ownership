@@ -1,0 +1,24 @@
+.chatbox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chatIcon {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chatContent {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}

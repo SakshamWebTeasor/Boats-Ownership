@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import Link from "next/link";
 import ApiLink from "./api/ApiLink";
+import Chatbox from "@/Component/ChatBox";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -95,6 +96,7 @@ export default function Home({
             </div>
           ))}
         </div>
+        <Chatbox />
       </main>
     </>
   );
