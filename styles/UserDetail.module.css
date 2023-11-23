@@ -1,0 +1,47 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.userDetails,
+.userBoats {
+  margin-bottom: 30px;
+}
+
+.userDetails h2,
+.userBoats h2 {
+  color: #007bff;
+}
+
+.userDetails p,
+.userBoats p {
+  margin: 10px 0;
+}
+
+.userBoats ul {
+  list-style: none;
+  padding: 0;
+}
+
+.userBoats li {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userBoats li img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.userImage {
+  width: 200px;
+  height: 100%;
+}

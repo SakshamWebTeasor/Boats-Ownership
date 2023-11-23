@@ -1,11 +1,33 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type Repo = {
+  ip: string;
+  boatsImg: string[];
+};
+
+export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async (
+  context
+) => {
+  const res = await fetch("https://api.ipify.org?format=json");
+  const BoatsImage = await fetch("http://localhost:3005/BoatsImage");
+  const data = await res.json();
+  const boatsImg: string[] = await BoatsImage.json();
+  const repo = { ...data, boatsImg };
+  return { props: { repo } };
+};
+
+export default function Home({
+  repo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log("repo", repo.boatsImg?.length);
+
   return (
     <>
       <Head>
@@ -17,98 +39,76 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
+            <Link href="/Boats">Our Boats</Link>
+            <Link href="/Users">Our Customers</Link>
+            <Link href="/About">About Us</Link>
+            <span className="d-flex justify-content-center d-md-none">
+              <Image
+                className={styles.logo + " mx-3"}
+                src="/BoatsLogo/SimpleB.png"
+                alt="Next.js Logo"
+                width={100}
+                height={50}
+                priority
+              />
+            </span>
+            {/* <code className={styles.code}>pages/index.tsx</code> */}
           </p>
           <div>
             <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              href="https://webteasor.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              Built By{" "}
               <Image
-                src="/vercel.svg"
+                src="/icon-512x512.png"
                 alt="Vercel Logo"
                 className={styles.vercelLogo}
                 width={100}
-                height={24}
+                height={100}
                 priority
               />
             </a>
           </div>
         </div>
-
         <div className={styles.center}>
           <Image
             className={styles.logo}
-            src="/next.svg"
+            src="/BoatsLogo/SimpleB.png"
             alt="Next.js Logo"
             width={180}
-            height={37}
+            height={90}
             priority
           />
+          <div>We Bring Adventure In Your Life</div>
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+        {/* <div>
+          {repo.boatsImg?.map((img) => {
+            return (
+              <img
+                src={img}
+                alt="Next.js Logo"
+                style={{ width: "100%" }}
+                key={img}
+              ></img>
+            );
+          })}
+        </div> */}
+        <div className={styles.row}>
+          {repo.boatsImg?.map((img, index) => (
+            <div key={index} className={styles.column}>
+              <img
+                src={img}
+                alt={`Boat ${index + 1}`}
+                style={{ width: "100%" }}
+              />
+            </div>
+          ))}
         </div>
       </main>
     </>
-  )
+  );
 }
+
+// BoatsImage

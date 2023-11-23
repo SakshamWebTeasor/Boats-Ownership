@@ -1,0 +1,27 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.userList {
+  list-style: none;
+  padding: 0;
+}
+
+.userItem {
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.userImage {
+  width: 100px; /* Adjust the width as needed */
+  margin-right: 15px;
+}
+
+.boatImage {
+  max-width: 200px;
+  height: auto;
+  margin-top: 10px;
+}

@@ -1,0 +1,30 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.aboutContent {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+}
+
+.sectionHeader {
+  color: #007bff;
+}
+
+.teamMembers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .teamMembers {
+    grid-template-columns: 1fr;
+  }
+}
