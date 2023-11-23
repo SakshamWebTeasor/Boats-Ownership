@@ -77,7 +77,7 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                       })}
                     </>
                   ) : (
-                    <h5>No Owners Yet</h5>
+                    <h5>No Owner Yet</h5>
                   )}
                 </div>
               </div>
