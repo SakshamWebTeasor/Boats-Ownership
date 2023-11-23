@@ -12,6 +12,7 @@ import { User } from "../Users";
 import styles2 from "../../styles/Users.module.css";
 import { Button } from "react-bootstrap";
 import ApiLink from "../api/ApiLink";
+import Image from "next/image";
 
 interface BoatDetailProps {
   boat: Boat; // Define your Boat interface here
@@ -22,7 +23,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
-  } 
+  }
   return (
     <>
       <Head>
@@ -54,7 +55,13 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
             <Owners users={users} />
           </div>
         )}
-        <img src={boat.ImgLink} alt={boat.name} className={styles.boatImage} />
+        <Image
+          src={boat.ImgLink}
+          alt={boat.name}
+          className={styles.boatImage}
+          width={750}
+          height={750}
+        />
         {boat.OwnersUserId.length == 0 ? (
           <Button className="mb-3 mt-5">Buy Now</Button>
         ) : (
@@ -81,10 +88,12 @@ const Owners: React.FC<{ users: User[] }> = ({ users }) => {
                 {user.name}
               </Link>
               <Link href={`/User/${user.id}`}>
-                <img
+                <Image
                   src={user.imgLink}
                   alt={user.name}
                   className={styles2.userImage}
+                  width={750}
+                  height={750}
                 />
               </Link>
             </p>

@@ -12,6 +12,7 @@ import { User } from "../Users";
 import styles2 from "../../styles/Users.module.css";
 import { Button } from "react-bootstrap";
 import ApiLink from "../api/ApiLink";
+import Image from "next/image";
 
 interface UserDetailProps {
   boats: Boat[]; // Define your Boat interface here
@@ -40,7 +41,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ boats, user }) => {
           }
         >
           <div>
-            <h2>{user.name}'s Details</h2>
+            <h2>{user.name}&apos;s Details</h2>
             <p>
               <strong>ID:</strong> {user.id}
             </p>
@@ -48,12 +49,13 @@ const UserDetail: React.FC<UserDetailProps> = ({ boats, user }) => {
               <strong>Age:</strong> {user.age}
             </p>
           </div>
-          <img
+          <Image
             src={user.imgLink}
             alt={user.name}
             className={styles.userImage}
+            width={750}
+            height={750}
           />
-          {/* Add more user details as needed */}
         </section>
         <OwnedBoats boats={boats} user={user} />
       </div>
@@ -64,7 +66,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ boats, user }) => {
 const OwnedBoats: React.FC<UserDetailProps> = ({ boats, user }) => {
   return (
     <section className={styles.userBoats}>
-      <h2>{user.name}'s Boats</h2>
+      <h2>{user.name}&apos;s Boats</h2>
       {boats.length > 0 ? (
         <ul className={styles2.userList}>
           {boats.map((boat) => (
@@ -81,17 +83,19 @@ const OwnedBoats: React.FC<UserDetailProps> = ({ boats, user }) => {
                 <p>Type: {boat.type}</p>
               </div>
               <Link href={`/Boat/${boat.id}`}>
-                <img
-                  src={boat.ImgLink}
-                  alt={boat.name}
-                  className={styles2.boatImage}
-                />
+                <Image
+                    src={boat.ImgLink}
+                    alt={boat.name}
+                    className={styles2.boatImage}
+                    width={750}
+                    height={750}
+                  />
               </Link>
             </li>
           ))}
         </ul>
       ) : (
-        <p>{user.name} doesn't own any boats yet.</p>
+        <p>{user.name} doesn&apos;t own any boats yet.</p>
       )}
     </section>
   );

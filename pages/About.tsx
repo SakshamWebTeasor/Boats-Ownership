@@ -26,7 +26,7 @@ const AboutUs: React.FC = () => {
           <h3 className={styles.sectionHeader+" mt-3"}>Who We Are</h3>
 
           <p>
-            <strong>Boat Coownership</strong> is a team of boating enthusiasts and technology experts who share a common love for the sea. We've combined our passion for boating with cutting-edge technology to bring you a platform that simplifies the boat buying and renting process. Our team comprises experienced sailors, tech wizards, and customer service champions.
+            <strong>Boat Coownership</strong> is a team of boating enthusiasts and technology experts who share a common love for the sea. We&apos;ve combined our passion for boating with cutting-edge technology to bring you a platform that simplifies the boat buying and renting process. Our team comprises experienced sailors, tech wizards, and customer service champions.
           </p>
         </section>
 
@@ -34,8 +34,8 @@ const AboutUs: React.FC = () => {
           <h3 className={styles.sectionHeader+" mt-3"}>What Sets Us Apart</h3>
 
           <ul>
-            <li><strong>Diverse Fleet:</strong> Explore a diverse fleet of boats, from luxury yachts to speedy cruisers, ensuring there's a perfect option for every adventure.</li>
-            <li><strong>User-Centric Design:</strong> Our platform is designed with users in mind. We've focused on creating an intuitive and user-friendly experience, making it easy for both boat owners and users to navigate.</li>
+            <li><strong>Diverse Fleet:</strong> Explore a diverse fleet of boats, from luxury yachts to speedy cruisers, ensuring there&apos;s a perfect option for every adventure.</li>
+            <li><strong>User-Centric Design:</strong> Our platform is designed with users in mind. We&apos;ve focused on creating an intuitive and user-friendly experience, making it easy for both boat owners and users to navigate.</li>
             <li><strong>Community Building:</strong> Join a community of boat enthusiasts and connect with like-minded individuals. Share your boating experiences, tips, and even plan joint adventures.</li>
           </ul>
         </section>
@@ -60,12 +60,12 @@ const AboutUs: React.FC = () => {
           <h3 className={styles.sectionHeader+" mt-3"}>Contact Us</h3>
 
           <p>
-            Ready to set sail or have questions about <strong>Boat Coownership</strong>? Reach out to us at <a href="mailto:contact@boatcoownership.com">contact@boatcoownership.com</a> – we're excited to assist you on your boating journey!
+            Ready to set sail or have questions about <strong>Boat Coownership</strong>? Reach out to us at <a href="mailto:contact@boatcoownership.com">contact@boatcoownership.com</a> – we&apos;re excited to assist you on your boating journey!
           </p>
         </section>
 
         <p>
-          Thank you for choosing <strong>Boat Coownership</strong>. Let's make waves together!
+          Thank you for choosing <strong>Boat Coownership</strong>. Let&apos;s make waves together!
         </p>
       </div>
     </div>

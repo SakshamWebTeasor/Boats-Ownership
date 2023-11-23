@@ -5,6 +5,11 @@ const withPWA = require("next-pwa")({
   skipWaiting: true,
   disable: process.env.NODE_ENV === "development",
 });
+
 module.exports = withPWA({
   reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ["images.unsplash.com", "plus.unsplash.com"],
+  },
 });

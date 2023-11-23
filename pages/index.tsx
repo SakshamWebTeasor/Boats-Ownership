@@ -82,25 +82,15 @@ export default function Home({
           />
           <div>We Bring Adventure In Your Life</div>
         </div>
-        {/* <div>
-          {repo.boatsImg?.map((img) => {
-            return (
-              <img
-                src={img}
-                alt="Next.js Logo"
-                style={{ width: "100%" }}
-                key={img}
-              ></img>
-            );
-          })}
-        </div> */}
         <div className={styles.row}>
           {repo.boatsImg?.map((img, index) => (
             <div key={index} className={styles.column}>
-              <img
+              <Image
                 src={img}
                 alt={`Boat ${index + 1}`}
-                style={{ width: "100%" }}
+                className={styles.boatImage}
+                width={750}
+                height={750}
               />
             </div>
           ))}

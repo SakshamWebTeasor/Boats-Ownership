@@ -16,7 +16,8 @@
 }
 
 .userImage {
-  width: 100px; /* Adjust the width as needed */
+  width: 103px;
+  height: auto;
   margin-right: 15px;
 }
 

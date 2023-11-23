@@ -5,6 +5,7 @@ import { Boat } from "./Boats";
 import Header from "@/Component/Header";
 import { Button } from "react-bootstrap";
 import ApiLink from "./api/ApiLink";
+import Image from "next/image";
 
 export interface User {
   id: number;
@@ -31,10 +32,12 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
             <li key={user.id} className={styles.userItem}>
               <div className="d-flex flex-direction-column justify-content-between">
                 <div>
-                  <img
+                  <Image
                     src={user.imgLink}
                     alt={user.name}
                     className={styles.userImage}
+                    width={750}
+                    height={750}
                   />
                   <h2>{user.name}</h2>
                   <p>Age: {user.age}</p>
@@ -66,10 +69,12 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
                             href={`/Boat/${boat.id}`}
                             style={{ color: "white", textDecoration: "none" }}
                           >
-                            <img
+                            <Image
                               src={boat.ImgLink}
                               alt={boat.name}
                               className={styles.boatImage}
+                              width={750}
+                              height={750}
                             />
                           </Link>
                         </li>

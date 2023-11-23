@@ -9,7 +9,7 @@
       "location": "Marina Bay",
       "Sold": false,
       "OwnersUserId": [],
-      "Price": 10000,
+      "Price": 7500,
       "ImgLink": "https://images.unsplash.com/photo-1443397646383-16272048780e"
     },
     {
@@ -45,7 +45,7 @@
       "location": "Harbor City",
       "Sold": true,
       "OwnersUserId": [3, 4],
-      "Price": 11000,
+      "Price": 1750,
       "ImgLink": "https://images.unsplash.com/photo-1541599773-711b4113029f"
     }
   ],

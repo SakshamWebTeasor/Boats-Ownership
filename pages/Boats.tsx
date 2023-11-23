@@ -5,6 +5,7 @@ import Link from "next/link";
 import { User } from "./Users";
 import Header from "@/Component/Header";
 import ApiLink from "./api/ApiLink";
+import Image from "next/image";
 
 export interface Boat {
   id: number;
@@ -80,10 +81,12 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                   )}
                 </div>
               </div>
-              <img
+              <Image
                 src={boat.ImgLink}
                 alt={boat.name}
                 className={styles.boatImage}
+                width={750}
+                height={750}
               />
             </li>
           );
