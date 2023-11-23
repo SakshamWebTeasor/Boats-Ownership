@@ -1,3 +1,5 @@
+/* About.module.css */
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -5,26 +7,26 @@
 }
 
 .aboutContent {
-  font-family: "Arial", sans-serif;
-  line-height: 1.6;
+  margin-top: 20px;
 }
 
 .sectionHeader {
-  color: #007bff;
+  color: #007bff; /* Bootstrap's primary color */
 }
 
+/* Style for team members */
 .teamMembers {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.teamMembers > div {
+  margin: 10px;
+}
+
+/* Responsive styles */
 @media screen and (max-width: 768px) {
   .container {
     padding: 10px;
-  }
-
-  .teamMembers {
-    grid-template-columns: 1fr;
   }
 }

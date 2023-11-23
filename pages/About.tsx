@@ -1,7 +1,7 @@
 // AboutUs.tsx
 
 import React from "react";
-import styles from "../styles/Boats.module.css";
+import styles from "../styles/About.module.css";
 import Header from "@/Component/Header";
 
 const AboutUs: React.FC = () => {
@@ -11,7 +11,6 @@ const AboutUs: React.FC = () => {
       <div className={styles.aboutContent}>
         <section>
           <h2 className={styles.sectionHeader+" mt-3"}>About Us</h2>
-
           <p>Welcome to <strong>Boat Coownership</strong>!</p>
         </section>
 
