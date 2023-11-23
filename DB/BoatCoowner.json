@@ -1,0 +1,88 @@
+{
+  "Boats": [
+    {
+      "id": 1,
+      "name": "Sea Voyager",
+      "type": "Yacht",
+      "length": 50.5,
+      "capacity": 10,
+      "location": "Marina Bay",
+      "Sold": false,
+      "OwnersUserId": [],
+      "Price": 10000,
+      "ImgLink": "https://images.unsplash.com/photo-1443397646383-16272048780e"
+    },
+    {
+      "id": 2,
+      "name": "River Explorer",
+      "type": "Pontoon Boat",
+      "length": 30.2,
+      "capacity": 8,
+      "location": "Riverfront Marina",
+      "Sold": true,
+      "OwnersUserId": [1, 2],
+      "Price": 12000,
+      "ImgLink": "https://images.unsplash.com/photo-1561728130-afd430af0493"
+    },
+    {
+      "id": 3,
+      "name": "Ocean Dreamer",
+      "type": "Sailboat",
+      "length": 45.8,
+      "capacity": 6,
+      "location": "Coastal Harbor",
+      "Sold": false,
+      "OwnersUserId": [],
+      "Price": 9000,
+      "ImgLink": "https://images.unsplash.com/photo-1511684633137-6b5fc88b3dbc"
+    },
+    {
+      "id": 4,
+      "name": "Speedy Cruiser",
+      "type": "Speedboat",
+      "length": 35.0,
+      "capacity": 5,
+      "location": "Harbor City",
+      "Sold": true,
+      "OwnersUserId": [3, 4],
+      "Price": 11000,
+      "ImgLink": "https://images.unsplash.com/photo-1541599773-711b4113029f"
+    }
+  ],
+  "Users": [
+    {
+      "id": 1,
+      "name": "Saksham",
+      "age": 23,
+      "imgLink": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f"
+    },
+    {
+      "id": 2,
+      "name": "Mohit",
+      "age": 24,
+      "imgLink": "https://images.unsplash.com/photo-1584316712724-f5d4b188fee2"
+    },
+    {
+      "id": 3,
+      "name": "Rohan",
+      "age": 24,
+      "imgLink": "https://images.unsplash.com/photo-1614950326208-f267d274c8df"
+    },
+    {
+      "id": 4,
+      "name": "Debu",
+      "age": 22,
+      "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049"
+    }
+  ],
+  "BoatsImage": [
+    "https://images.unsplash.com/photo-1443397646383-16272048780e",
+    "https://images.unsplash.com/photo-1561728130-afd430af0493",
+    "https://images.unsplash.com/photo-1511684633137-6b5fc88b3dbc",
+    "https://images.unsplash.com/photo-1495279957139-3a9a3773ea4d",
+    "https://images.unsplash.com/photo-1599943238450-b0edf519982b",
+    "https://images.unsplash.com/photo-1554254648-2d58a1bc3fd5",
+    "https://images.unsplash.com/photo-1586699253884-e199770f63b9",
+    "https://images.unsplash.com/photo-1595913706732-0e65fd0c51d1"
+  ]
+}

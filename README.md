@@ -38,3 +38,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Starting Server Locally
+
+```bash
+npm i -g json-server
+```
+
+A File BoatCoowner.json is stored in */DB* directory
+All Api's are integrated in this PWA using port *3005*.
+
+Use Following after going Command to 
+```
+json-server --watch -p 3005 Boatcoowner.json
+```
