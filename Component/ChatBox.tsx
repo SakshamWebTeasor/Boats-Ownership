@@ -3,8 +3,9 @@ import styles from "@/styles/Chatbox.module.css";
 import { Button } from "react-bootstrap";
 import { getChatResponse } from "@/Component/ApiLink";
 import Image from "next/image";
+require("dotenv").config();
 
-const Chatbox: React.FC = () => {
+const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
   const [input, setInput] = useState<string>("");
   const [chat, setChat] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,9 +13,9 @@ const Chatbox: React.FC = () => {
     e.preventDefault();
     setInput(e.target.value);
   }
-  function getResponse() {
+  async function getResponse() {
     setLoading(true);
-    getChatResponse(input)
+    getChatResponse(input, ApiKey)
       .then((response) => {
         console.log(response);
         setChat([...chat, response]);
@@ -53,9 +54,7 @@ const Chatbox: React.FC = () => {
         {chat.map((message, index) => (
           <div key={index} className="d-flex">
             <div style={{ width: "20px" }}>*</div>
-            <div
-              style={{ width: "238px", textAlign: "justify" }}
-            >
+            <div style={{ width: "238px", textAlign: "justify" }}>
               {message}
             </div>
           </div>

@@ -13,20 +13,23 @@ const inter = Inter({ subsets: ["latin"] });
 type Repo = {
   ip: string;
   boatsImg: string[];
+  ApiKey: string;
 };
 
 export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
+  const ApiKey = process.env.API_KEY || "";
   const res = await fetch("https://api.ipify.org?format=json");
   const BoatsImage = await fetch(`${ApiLink}/BoatsImage`);
   const data = await res.json();
   const boatsImg: string[] = await BoatsImage.json();
-  const repo = { ...data, boatsImg };
+  const repo = { ...data, boatsImg, ApiKey };
   return { props: { repo }, revalidate: 60 }; // revalidate time in seconds
 };
 
 export default function Home({
   repo,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log(repo.ApiKey)
   return (
     <>
       <Head>
@@ -94,7 +97,7 @@ export default function Home({
             </div>
           ))}
         </div>
-        <Chatbox />
+        <Chatbox ApiKey={repo.ApiKey}/>
       </main>
     </>
   );

@@ -5,10 +5,9 @@
 // const apiUrl = process.env.API_URL;
 
 export const ApiLink = "https://8607-27-255-248-254.ngrok-free.app";
-export const apiKey = "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";
 export const apiUrl = "https://api.openai.com/v1/chat/completions";
 
-export async function getChatResponse(prompt: string) {
+export async function getChatResponse(prompt: string, apiKey: string) {
     const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
