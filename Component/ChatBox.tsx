@@ -17,7 +17,6 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
     setLoading(true);
     getChatResponse(input, ApiKey)
       .then((response) => {
-        console.log(response);
         setChat([...chat, response]);
         setInput("");
         setLoading(false);
@@ -25,9 +24,9 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
       .catch((error) => console.error(error));
   }
   return (
-    <div className={styles.chatbox}>
+    <div className={styles.chatbox+" "+styles.chatboxb200}>
       <div className={styles.chatIcon}>
-        💬
+        💬 Say Hello To My New Bot
         <input
           onChange={(e) => changeInput(e)}
           type={"text"}

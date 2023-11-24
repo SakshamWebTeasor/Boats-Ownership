@@ -163,6 +163,14 @@
     padding: 1rem;
   }
 
+  .description h4 {
+    padding: 1rem;
+  }
+
+  .description button {
+    margin: 1rem;
+  }
+
   .description p,
   .description div {
     display: flex;
@@ -245,10 +253,36 @@
   }
 }
 
-/* Tablet and Smaller Desktop */
+.show700None {
+  display: block;
+}
+
+.show625flex {
+  display: none !important;
+}
+
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .description span,
+  .description button {
+    display: none;
+  }
+  .show625flex {
+    display: flex !important;
+  }
+  .main {
+    padding: 3rem !important;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .show700None {
+    display: none !important;
   }
 }
 

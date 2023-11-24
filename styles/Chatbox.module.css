@@ -9,6 +9,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* .chatboxb200 {
+  bottom: 200px !important;
+} */
+
 .chatIcon {
   background-color: #000b17;
   color: #fff;
@@ -22,4 +26,10 @@
   max-height: 300px;
   overflow-y: auto;
   background-color: rgb(91, 91, 255);
+}
+
+@media screen and (max-width: 700px) {
+  .chatboxb200 {
+    bottom: 200px !important;
+  }
 }

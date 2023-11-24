@@ -88,7 +88,11 @@ body {
 
 body {
   color: #fff !important;
-  background:linear-gradient(to bottom, rgb(125 125 125) 0%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgb(95 95 95) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 a {
@@ -117,7 +121,8 @@ p {
   font-weight: 600;
   text-decoration: "underline";
 }
-.DSM-Block-F, .DSM-Block {
+.DSM-Block-F,
+.DSM-Block {
   display: none;
 }
 

@@ -6,6 +6,7 @@ import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import Link from "next/link";
 import ApiLink from "../Component/ApiLink";
 import Chatbox from "@/Component/ChatBox";
+import Header from "@/Component/Header";
 require("dotenv").config();
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +30,6 @@ export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
 export default function Home({
   repo,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(repo.ApiKey)
   return (
     <>
       <Head>
@@ -42,9 +42,9 @@ export default function Home({
         <div className={styles.description}>
           <p>
             <Link href="/Boats">Our Boats</Link>
-            <Link href="/Users">Our Customers</Link>
+            <Link href="/Users">Our Users</Link>
             <Link href="/About">About Us</Link>
-            <span className="d-flex justify-content-center d-md-none">
+            <span className={styles.show700None +" d-flex justify-content-center d-md-none"}>
               <Image
                 className={styles.logo + " mx-3"}
                 src="/BoatsLogo/SimpleB.png"
@@ -55,6 +55,7 @@ export default function Home({
               />
             </span>
           </p>
+          {/* <Header Page="" PrePage="" /> */}
           <div>
             <a
               href="https://webteasor.com/"
@@ -97,7 +98,9 @@ export default function Home({
             </div>
           ))}
         </div>
-        <Chatbox ApiKey={repo.ApiKey}/>
+        <div>
+          <Chatbox ApiKey={repo.ApiKey} />
+        </div>
       </main>
     </>
   );
