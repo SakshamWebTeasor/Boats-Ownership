@@ -40,7 +40,7 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
         {loading && (
           <span className="px-5">
             <Image
-              src="/BoatsLogo/g0r5.gif"
+              src="https://i.ibb.co/LZDhRc6/g0R5.gif"
               alt="Loading Logo"
               width={50}
               height={50}
