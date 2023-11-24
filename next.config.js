@@ -4,7 +4,6 @@ const withPWA = require("next-pwa")({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === "development",
-  swcMinify: true,
 });
 
 module.exports = withPWA({
@@ -31,5 +30,6 @@ module.exports = withPWA({
       },
     ],
   },
+  swcMinify: true,
   ...withPWA
 });
