@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import styles from "@/styles/Chatbox.module.css";
 import { Button } from "react-bootstrap";
-import { getChatResponse } from "@/pages/api/ApiLink";
+import { getChatResponse } from "@/Component/ApiLink";
+import Image from "next/image";
 
 const Chatbox: React.FC = () => {
   const [input, setInput] = useState<string>("");
+  const [chat, setChat] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   function changeInput(e: any) {
     e.preventDefault();
     setInput(e.target.value);
   }
   function getResponse() {
-    console.log(input);
+    setLoading(true);
     getChatResponse(input)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        setChat([...chat, response]);
+        setInput("");
+        setLoading(false);
+      })
       .catch((error) => console.error(error));
   }
   return (
@@ -25,10 +33,33 @@ const Chatbox: React.FC = () => {
           className={styles.chatInput}
           value={input}
         ></input>
-        <Button onClick={(e) => getResponse()}>Send</Button>
+        <Button className="mt-3" onClick={(e) => getResponse()}>
+          Send
+        </Button>
+        {loading && (
+          <span className="px-5">
+            <Image
+              src="/BoatsLogo/g0r5.gif"
+              alt="Loading Logo"
+              width={50}
+              height={50}
+              priority
+            />
+          </span>
+        )}
       </div>
       <div className={styles.chatContent}>
         {/* Add your chat content and logic here */}
+        {chat.map((message, index) => (
+          <div key={index} className="d-flex">
+            <div style={{ width: "20px" }}>*</div>
+            <div
+              style={{ width: "238px", textAlign: "justify" }}
+            >
+              {message}
+            </div>
+          </div>
+        ))}
         {/* This can include user messages, bot responses, input field, etc. */}
       </div>
     </div>

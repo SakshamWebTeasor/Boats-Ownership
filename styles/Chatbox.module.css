@@ -10,7 +10,7 @@
 }
 
 .chatIcon {
-  background-color: #007bff;
+  background-color: #000b17;
   color: #fff;
   padding: 10px;
   font-size: 20px;
@@ -21,4 +21,5 @@
   padding: 10px;
   max-height: 300px;
   overflow-y: auto;
+  background-color: rgb(91, 91, 255);
 }

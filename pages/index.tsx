@@ -2,10 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import type { InferGetStaticPropsType, GetStaticProps } from "next";
 import Link from "next/link";
-import ApiLink from "./api/ApiLink";
+import ApiLink from "../Component/ApiLink";
 import Chatbox from "@/Component/ChatBox";
+require("dotenv").config();
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,20 +15,18 @@ type Repo = {
   boatsImg: string[];
 };
 
-export const getServerSideProps: GetServerSideProps<{ repo: Repo }> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
   const res = await fetch("https://api.ipify.org?format=json");
   const BoatsImage = await fetch(`${ApiLink}/BoatsImage`);
   const data = await res.json();
   const boatsImg: string[] = await BoatsImage.json();
   const repo = { ...data, boatsImg };
-  return { props: { repo } };
+  return { props: { repo }, revalidate: 60 }; // revalidate time in seconds
 };
 
 export default function Home({
   repo,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -52,7 +51,6 @@ export default function Home({
                 priority
               />
             </span>
-            {/* <code className={styles.code}>pages/index.tsx</code> */}
           </p>
           <div>
             <a
@@ -101,5 +99,3 @@ export default function Home({
     </>
   );
 }
-
-// BoatsImage
