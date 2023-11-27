@@ -44,9 +44,10 @@ export default function Home({
             <Link href="/Boats">Our Boats</Link>
             <Link href="/Users">Our Users</Link>
             <Link href="/About">About Us</Link>
+            <Link href="/Purchase">Purchase & Partnership</Link>
             <span className={styles.show700None +" d-flex justify-content-center d-md-none"}>
               <Image
-                className={styles.logo + " mx-3"}
+                className={styles.logo + ""}
                 src="/BoatsLogo/SimpleB.png"
                 alt="Next.js Logo"
                 width={100}

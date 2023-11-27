@@ -21,19 +21,32 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
             &lt;
           </Button>
           {`Our ${Page}` == "Our Boats" ? (
-            <cite style={{fontSize:"24px"}}>Our Boats </cite>
+            <cite style={{ fontSize: "24px" }}>Our Boats </cite>
           ) : (
             <Link href="/Boats">Our Boats</Link>
           )}
           {`Our ${Page}` == "Our Users" ? (
-            <cite style={{fontSize:"24px"}}>Our Users </cite>
+            <cite style={{ fontSize: "24px" }}>Our Users </cite>
           ) : (
             <Link href="/Users">Our Users</Link>
           )}
           {Page == "About" ? (
-            <cite style={{fontSize:"24px"}}>About Us </cite>
+            <cite style={{ fontSize: "24px" }}>About Us </cite>
           ) : (
             <Link href="/About">About Us</Link>
+          )}
+          {Page == "Purchase" ? (
+            <cite style={{ fontSize: "18px" }}>
+              Purchase&nbsp;&
+              <br />
+              Partnership
+            </cite>
+          ) : (
+            <Link href="/Purchase">
+              Purchase&nbsp;&
+              <br />
+              Partnership
+            </Link>
           )}
           <span>
             <Link href="/" style={{ color: "white", textDecoration: "none" }}>
@@ -50,7 +63,11 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
         </p>
       </div>
       <div style={{ marginTop: "120px" }} className={styles2.show700None}>
-        <div className={styles2.show625flex +" justify-content-between align-items-center"}>
+        <div
+          className={
+            styles2.show625flex + " justify-content-between align-items-center"
+          }
+        >
           <Button
             type="button"
             className="btn btn-dark mb-3 "

@@ -1,6 +1,6 @@
 // pages/Boat/[id].tsx
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "@/styles/BoatDetail.module.css";
@@ -13,6 +13,7 @@ import styles2 from "../../styles/Users.module.css";
 import { Button } from "react-bootstrap";
 import ApiLink from "../../Component/ApiLink";
 import Image from "next/image";
+import LoginModal from "@/Component/Modal/LoginModal";
 
 interface BoatDetailProps {
   boat: Boat; // Define your Boat interface here
@@ -21,6 +22,21 @@ interface BoatDetailProps {
 
 const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleBuyButtonClick = () => {
+    if (isLoggedIn) {
+      console.log("User is logged in. Performing buy action...");
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleLoginModalClose = () => {
+    setShowModal(false);
+  };
+
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
@@ -49,6 +65,9 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
             </div>
           )}
         </div>
+        {showModal && (
+        <LoginModal onClose={handleLoginModalClose} />
+      )}
         {users.length > 0 && (
           <div className="Owners DSM-Block mt-5">
             <h2>Owners:-</h2>
@@ -63,9 +82,13 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
           height={750}
         />
         {boat.OwnersUserId.length == 0 ? (
-          <Button className="mb-3 mt-5">Buy Now</Button>
+          <Button className="mb-3 mt-5" onClick={handleBuyButtonClick}>
+            Buy Now
+          </Button>
         ) : (
-          <Button className="mb-3 mt-5">Buy In Partnership</Button>
+          <Button className="mb-3 mt-5" onClick={handleBuyButtonClick}>
+            Buy In Partnership
+          </Button>
         )}
       </div>
     </>
