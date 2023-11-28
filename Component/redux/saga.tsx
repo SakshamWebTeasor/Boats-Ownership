@@ -2,13 +2,13 @@ import { takeEvery, put } from "redux-saga/effects";
 import { SET_USER_DATA, USER_LIST } from "./constants";
 import ApiLink from "../ApiLink";
 
-function* SagaData() {
+function* SagaData(): Generator {
   yield takeEvery(USER_LIST, UserList);
 }
 
-function* UserList() {
-  const url = ApiLink + "/users";
-  let data = yield fetch(url);
+function* UserList(): Generator {
+  const url: string = ApiLink + "/users";
+  let data: any = yield fetch(url);
   data = yield data.json();
   yield put({ type: SET_USER_DATA, data });
 }

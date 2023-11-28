@@ -48,7 +48,7 @@ export default function Purchase({
               enhance safety, efficiency, and overall enjoyment.
             </li>
             <li>
-              <strong>Versatility for Every Lifestyle:</strong> Whether you're a
+              <strong>Versatility for Every Lifestyle:</strong> Whether you&apos;re a
               fishing enthusiast, a family seeking leisurely cruises, or an
               adventure seeker, our diverse range of boats caters to every
               lifestyle and water activity.
@@ -190,8 +190,8 @@ export default function Purchase({
 
           <p>
             Partnering with Boat Coownership is more than a business
-            collaboration; it's a journey toward mutual growth and success.
-            Connect with us today and let's explore the exciting possibilities
+            collaboration; it&apos;s a journey toward mutual growth and success.
+            Connect with us today and let&apos;s explore the exciting possibilities
             that lie ahead.
           </p>
         </section>

@@ -4,8 +4,8 @@
 // const apiKey = process.env.API_KEY;
 // const apiUrl = process.env.API_URL;
 
-export const ApiLink = "http://localhost:3005/api";
-export const ApiMainLink = "http://localhost:3005";
+export const ApiMainLink = "https://aa2c-27-255-220-98.ngrok-free.app";
+export const ApiLink = ApiMainLink + "/api";
 export const apiUrl = "https://api.openai.com/v1/chat/completions";
 
 export async function getChatResponse(prompt: string, apiKey: string) {
