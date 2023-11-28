@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Boats.module.css";
 import { Button } from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
 import styles2 from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
+import Chatbox from "./ChatBox";
+import UserLoggedIn from "./UserLoggedIn";
 
 function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
   const router = useRouter();
+  const [apiKey, setApiKey] = useState<string | null>("");
   const pathname = router.pathname;
+  const setKey = () => {
+    setApiKey(localStorage.getItem("ApiKey"));
+  };
+  useEffect(() => {
+    setKey();
+  }, []);
   return (
     <div>
       <div className={styles2.description}>
@@ -94,6 +103,9 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
             />
           </Link>
         </div>
+      </div>
+      <div>
+        <UserLoggedIn />
       </div>
     </div>
   );

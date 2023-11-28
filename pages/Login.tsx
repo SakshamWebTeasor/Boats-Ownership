@@ -3,11 +3,14 @@ import { useRouter } from "next/router";
 import styles from "../styles/Login.module.css"; // Make sure to create this CSS file
 import Link from "next/link";
 import { ApiMainLink } from "@/Component/ApiLink";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/Component/redux/action";
 
 const LoginPage = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
+        dispatch(loginSuccess(data.data.user));
         localStorage.setItem("token", token);
         router.push("/");
       } else {
@@ -59,7 +63,7 @@ const LoginPage = () => {
         </button>
         <div className="d-flex justify-content-end mt-3">
           <Link href="/Register">
-            <button className={styles.button}>Create Account</button>
+            <button className={styles.button}>Register</button>
           </Link>
         </div>
       </form>

@@ -1,5 +1,3 @@
-// AboutUs.tsx
-
 import React from "react";
 import styles from "../styles/About.module.css";
 import Header from "@/Component/Header";
@@ -73,8 +71,9 @@ export default function Purchase({
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {boatsImg?.map((img:string, index:number) => (
-              <SwiperSlide>
+            {boatsImg?.map((img: string, index: number) => (
+              <SwiperSlide key={index}>
+                {" "}
                 <Image
                   src={img}
                   alt={`Boat ${index + 1}`}

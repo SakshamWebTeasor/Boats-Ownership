@@ -5,7 +5,7 @@ import { getChatResponse } from "@/Component/ApiLink";
 import Image from "next/image";
 require("dotenv").config();
 
-const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
+const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
   const [input, setInput] = useState<string>("");
   const [chat, setChat] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,10 +24,11 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
       .catch((error) => console.error(error));
   }
   return (
-    <div className={styles.chatbox+" "+styles.chatboxb200}>
+    <div className={styles.chatbox + " " + styles.chatboxb200}>
       <div className={styles.chatIcon}>
         💬 Say Hello To My New Bot
         <input
+          style={{ width: "100%" }}
           onChange={(e) => changeInput(e)}
           type={"text"}
           className={styles.chatInput}
@@ -49,7 +50,6 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
         )}
       </div>
       <div className={styles.chatContent}>
-        {/* Add your chat content and logic here */}
         {chat.map((message, index) => (
           <div key={index} className="d-flex">
             <div style={{ width: "20px" }}>*</div>
@@ -58,7 +58,6 @@ const Chatbox = ( {ApiKey}: {ApiKey: string} ) => {
             </div>
           </div>
         ))}
-        {/* This can include user messages, bot responses, input field, etc. */}
       </div>
     </div>
   );
