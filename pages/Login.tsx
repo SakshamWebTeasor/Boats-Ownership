@@ -25,7 +25,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
-        dispatch(loginSuccess(data.data.user));
+        dispatch(loginSuccess({ ...data.data.user, token }));
         localStorage.setItem("token", token);
         router.push("/");
       } else {

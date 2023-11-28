@@ -35,9 +35,11 @@ const UserLoggedIn = () => {
           {userLoggedIn ? (
             <>
               <div>Hello&nbsp;{userLoggedIn.name}&nbsp;!</div>
-              <Button className={styles.button + " btn btn-danger"}>
-                Edit&nbsp;Your&nbsp;Profile
-              </Button>
+              <Link href="/Profile">
+                <Button className={styles.button + " btn btn-danger"}>
+                  Edit&nbsp;Your&nbsp;Profile
+                </Button>
+              </Link>
               <Button
                 className={styles.button + " btn btn-danger"}
                 onClick={handleLogout}

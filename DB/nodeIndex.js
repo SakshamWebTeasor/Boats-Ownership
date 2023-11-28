@@ -30,15 +30,19 @@ const isAuthorized = ({ email, password }) => {
   return {
     user: { ...user, password: undefined, id: undefined },
     bool: user.password == password,
+    token: generateToken(user),
   };
 };
 
 function generateToken(user) {
   const payload = {
-    userId: user.id,
+    id: user.id,
     userEmail: user.email,
     age: user.age,
   };
+  console.log("====================================");
+  console.log("payload", payload);
+  console.log("====================================");
   const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
   return token;
 }
@@ -52,12 +56,12 @@ server.get("/", (req, res) => {
 });
 
 server.post("/login", (req, res) => {
-  const { user, bool } = isAuthorized(req.body);
+  const { user, bool, token } = isAuthorized(req.body);
   res.status(bool ? 200 : 404).json({
     data: {
       user: bool ? user : undefined,
     },
-    token: bool ? generateToken(user) : "",
+    token: token,
     message: bool ? "login success" : "login failed",
     status: bool ? 200 : 404,
   });

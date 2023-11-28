@@ -20,7 +20,10 @@
       "capacity": 8,
       "location": "Riverfront Marina",
       "Sold": true,
-      "OwnersUserId": [1, 2],
+      "OwnersUserId": [
+        1,
+        2
+      ],
       "Price": 12000,
       "ImgLink": "https://images.unsplash.com/photo-1561728130-afd430af0493"
     },
@@ -44,7 +47,10 @@
       "capacity": 5,
       "location": "Harbor City",
       "Sold": true,
-      "OwnersUserId": [3, 4],
+      "OwnersUserId": [
+        3,
+        4
+      ],
       "Price": 1750,
       "ImgLink": "https://images.unsplash.com/photo-1541599773-711b4113029f"
     }
@@ -56,7 +62,7 @@
       "email": "Saksham@gmail.com",
       "age": 23,
       "imgLink": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f",
-      "password":"Saksham@123"
+      "password": "Saksham@123"
     },
     {
       "id": 2,
@@ -64,7 +70,7 @@
       "email": "Mohit@gmail.com",
       "age": 24,
       "imgLink": "https://images.unsplash.com/photo-1584316712724-f5d4b188fee2",
-      "password":"Mohit@123"
+      "password": "Mohit@123"
     },
     {
       "id": 3,
@@ -72,7 +78,7 @@
       "email": "Rohan@gmail.com",
       "age": 24,
       "imgLink": "https://images.unsplash.com/photo-1614950326208-f267d274c8df",
-      "password":"Rohan@123"
+      "password": "Rohan@123"
     },
     {
       "id": 4,
@@ -80,7 +86,7 @@
       "email": "Debu@gmail.com",
       "age": 22,
       "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
-      "password":"Debu@123"
+      "password": "Debu@123"
     }
   ],
   "BoatsImage": [

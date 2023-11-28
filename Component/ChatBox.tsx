@@ -25,7 +25,6 @@ const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
       })
       .catch((error) => console.error(error));
   }
-  console.log("router", router.pathname == "/");
   const additionalClass = router.pathname == "/" ? styles.chatboxb200 : " ";
 
   return (
