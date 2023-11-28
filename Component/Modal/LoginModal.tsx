@@ -9,7 +9,6 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
-  console.log("hi");
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>

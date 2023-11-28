@@ -5,6 +5,7 @@ import { logout } from "./redux/action";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import Chatbox from "./ChatBox";
+import { useRouter } from "next/router";
 
 const UserLoggedIn = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -18,8 +19,14 @@ const UserLoggedIn = () => {
     dispatch(logout());
   };
 
+  const router = useRouter();
+
   return (
-    <div className={styles.userLoggedIn}>
+    <div
+      className={
+        router.pathname != "/" ? styles.userLoggedIn2 : styles.userLoggedIn
+      }
+    >
       <button className={styles.profileButton} onClick={toggleProfile}>
         {showProfile ? "Hide Menu" : "Show Menu"}
       </button>

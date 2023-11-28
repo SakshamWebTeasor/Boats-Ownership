@@ -3,9 +3,11 @@ import styles from "@/styles/Chatbox.module.css";
 import { Button } from "react-bootstrap";
 import { getChatResponse } from "@/Component/ApiLink";
 import Image from "next/image";
+import { useRouter } from "next/router";
 require("dotenv").config();
 
 const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
+  const router = useRouter();
   const [input, setInput] = useState<string>("");
   const [chat, setChat] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,8 +25,11 @@ const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
       })
       .catch((error) => console.error(error));
   }
+  console.log("router", router.pathname == "/");
+  const additionalClass = router.pathname == "/" ? styles.chatboxb200 : " ";
+
   return (
-    <div className={styles.chatbox + " " + styles.chatboxb200}>
+    <div className={styles.chatbox + " " + additionalClass}>
       <div className={styles.chatIcon}>
         💬 Say Hello To My New Bot
         <input

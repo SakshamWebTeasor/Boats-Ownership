@@ -6,6 +6,7 @@ import { User } from "./Users";
 import Header from "@/Component/Header";
 import ApiLink from "../Component/ApiLink";
 import Image from "next/image";
+import BuyButton from "@/Component/Button/BuyButton";
 
 export interface Boat {
   id: number;
@@ -44,11 +45,14 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                   <p>Price: ${boat.Price}</p>
                 </div>
                 <div className="d-flex flex-column">
-                  {boat.OwnersUserId.length == 0 ? (
+                  {/* {boat.OwnersUserId.length == 0 ? (
                     <Button className="mb-3">Buy Now</Button>
                   ) : (
                     <Button className="mb-3">Buy Partnership</Button>
-                  )}
+                  )} */}
+                  <BuyButton ownerIds={boat.OwnersUserId} 
+                  // setShowModal={setShowModal}
+                  />
                   <Button className="mb-3">
                     <Link
                       href={`/Boat/${boat.id}`}
