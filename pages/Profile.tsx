@@ -1,5 +1,3 @@
-// ProfilePage.tsx
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/Profile.module.css";
@@ -13,17 +11,21 @@ const ProfilePage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
-  const decoded: any = jwtDecode(user?.token);
-  const [username, setUsername] = useState("");
-  const [imgLink, setImgLink] = useState("");
-  const [age, setAge] = useState(0);
+  const decoded: any = user?.token ? jwtDecode(user.token) : null;
+  const [username, setUsername] = useState(user?.name || "");
+  const [imgLink, setImgLink] = useState(user?.imgLink || "");
+  const [age, setAge] = useState(user?.age || 0);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    setUsername(user?.name);
-    setImgLink(user?.imgLink);
-    setAge(user?.age);
-  }, []);
+    if (user) {
+      setUsername(user.name || "");
+      setImgLink(user.imgLink || "");
+      setAge(user.age || 0);
+    }
+  }, [user]);
   const handleUpdateProfile = async (e: any) => {
     e.preventDefault();
+    setIsLoading(true);
     const updatedUserData = {
       name: username,
       imgLink: imgLink,
@@ -39,19 +41,25 @@ const ProfilePage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        dispatch(loginSuccess({
-          ...data,
-          token: user?.token,
-          id: undefined,
-          password: undefined,
-        }));
+        dispatch(
+          loginSuccess({
+            ...data,
+            token: user?.token,
+            id: undefined,
+            password: undefined,
+          })
+        );
         console.log("Profile updated successfully!");
         router.push("/");
       } else {
         console.error("Profile update failed:", response.statusText);
       }
+      setIsLoading(false);
     } catch (error) {
       console.error("Error during profile update:", error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -98,8 +106,8 @@ const ProfilePage = () => {
             className={styles.input}
           />
         </label>
-        <button type="submit" className={styles.button}>
-          Update Profile
+        <button type="submit" className={styles.button} disabled={isLoading}>
+          {isLoading ? "Updating..." : "Update Profile"}
         </button>
       </form>
     </div>
