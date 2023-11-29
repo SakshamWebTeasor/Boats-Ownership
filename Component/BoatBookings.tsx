@@ -33,7 +33,7 @@ function BoatBookings({
       });
       if (response.ok) {
         const { data }: { data: BoatBooking } = await response.json();
-        console.log(`Booking ${bookingId} approved successfully!`, data);
+        console.log(`Booking ${bookingId} approved successfully!`);
         setBookingS((prevData) => {
           return prevData.map((booking) => {
             if (booking.id === bookingId) {
@@ -56,7 +56,7 @@ function BoatBookings({
     <div>
       {ownerIds.length > 0 && (
         <div>
-          <h3 className={styles.heading}>All Bookings</h3>
+          <h3 className={styles.heading+" mt-3"}>All Bookings</h3>
           <table className={styles.table}>
             <thead>
               <tr className={styles.tr}>
@@ -68,6 +68,7 @@ function BoatBookings({
                   <>
                     <th className={styles.th}>Approved By</th>
                     <th className={styles.th}>Your Approval</th>
+                    <th className={styles.th}>Booking Status</th>
                   </>
                 )}
               </tr>
@@ -116,6 +117,16 @@ function BoatBookings({
                           </button>
                         </td>
                       )}
+                      <td
+                        className={styles.td}
+                        style={{
+                          backgroundColor: booking.Approved
+                            ? "green"
+                            : "orange",
+                        }}
+                      >
+                        {booking.Approved ? "Booked" : "Pending"}
+                      </td>
                     </>
                   )}
                 </tr>
@@ -125,8 +136,8 @@ function BoatBookings({
         </div>
       )}
       {myUserIdExists.bool && ownerIds.length > 0 && (
-        <div>
-          <h3 className={styles.heading}>Book Your Slot</h3>
+        <div className="mt-5">
+          <h3 className={styles.heading}>Request Booking of Slot</h3>
           {/* Implement your booking form or calendar here */}
         </div>
       )}
