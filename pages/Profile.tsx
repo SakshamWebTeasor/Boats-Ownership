@@ -12,14 +12,14 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const [decoded, setDecoded] = useState<any>({});
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
-  const [username, setUsername] = useState("");
-  const [imgLink, setImgLink] = useState("");
-  const [age, setAge] = useState(0);
+  const [username, setUsername] = useState(user?.name || "");
+  const [imgLink, setImgLink] = useState(user?.imgLink || "");
+  const [age, setAge] = useState(user?.age || 0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (user?.token) {
-      const decodedToken = jwtDecode(user.token);   
+      const decodedToken = jwtDecode(user.token);
       setDecoded(decodedToken);
     }
   }, [user]);
