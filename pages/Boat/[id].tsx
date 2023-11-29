@@ -1,6 +1,4 @@
-// pages/Boat/[id].tsx
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "@/styles/BoatDetail.module.css";
@@ -13,15 +11,43 @@ import styles2 from "../../styles/Users.module.css";
 import ApiLink from "../../Component/ApiLink";
 import Image from "next/image";
 import BuyButton from "@/Component/Button/BuyButton";
+import BoatBookings from "@/Component/BoatBookings";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
+export interface BoatBooking {
+  id: number;
+  boatId: number;
+  userId: number;
+  BookingDate: string;
+  From: string;
+  To: string;
+  Approved: boolean;
+  Status: string;
+  NeedApprovalFrom: number[];
+  ApprovedBy: number[];
+  MustBeApproveBefore: string;
+}
 interface BoatDetailProps {
   boat: Boat;
   users: User[];
+  boatBookings: BoatBooking[];
 }
 
-const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
+const BoatDetail: React.FC<BoatDetailProps> = ({
+  boat,
+  users,
+  boatBookings,
+}) => {
   const router = useRouter();
-
+  const user = useSelector((state: any) => state.reducer.userLoggedIn);
+  const [decoded, setDecoded] = useState<any>({});
+  useEffect(() => {
+    if (user?.token) {
+      const decodedToken = jwtDecode(user.token);
+      setDecoded(decodedToken);
+    }
+  }, [user]);
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
@@ -64,6 +90,12 @@ const BoatDetail: React.FC<BoatDetailProps> = ({ boat, users }) => {
           height={750}
         />
         <BuyButton ownerIds={boat.OwnersUserId} />
+        <BoatBookings
+          ownerIds={boat.OwnersUserId}
+          myUserIdExists={{bool:boat.OwnersUserId.includes(decoded?.id),myId:decoded?.id}}
+          bookings={boatBookings}
+          users={users}
+        />
       </div>
     </>
   );
@@ -105,6 +137,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id }: any = params;
   const res = await fetch(`${ApiLink}/Boats/${id}`);
   const boat: Boat = await res.json();
+
+  const response = await fetch(`${ApiLink}/BoatBookings?boatId=${id}`);
+  const bookingData: BoatBooking[] = await response.json();
+
   let urlForUsers: string = `${ApiLink}/Users?`;
   boat.OwnersUserId.map((id, index) => {
     let addAnd: boolean = boat.OwnersUserId.length - 1 !== index;
@@ -121,6 +157,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     props: {
       boat,
       users,
+      boatBookings: bookingData,
     },
   };
 };

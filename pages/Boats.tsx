@@ -45,14 +45,7 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                   <p>Price: ${boat.Price}</p>
                 </div>
                 <div className="d-flex flex-column">
-                  {/* {boat.OwnersUserId.length == 0 ? (
-                    <Button className="mb-3">Buy Now</Button>
-                  ) : (
-                    <Button className="mb-3">Buy Partnership</Button>
-                  )} */}
-                  <BuyButton ownerIds={boat.OwnersUserId} 
-                  // setShowModal={setShowModal}
-                  />
+                  <BuyButton ownerIds={boat.OwnersUserId} />
                   <Button className="mb-3">
                     <Link
                       href={`/Boat/${boat.id}`}

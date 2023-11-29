@@ -11,19 +11,7 @@ server.use(express.json());
 
 const secretKey = process.env.SECRET_KEY || "12rtu20@s";
 
-server.use("/user", (req, res, next) => {
-  try {
-    if (isAuthorized(req.query).bool) {
-      next();
-    } else {
-      res.sendStatus(401);
-    }
-  } catch (error) {
-    res.sendStatus(401);
-  }
-});
-
-const isAuthorized = ({ email, password }) => {
+const genAuth = ({ email, password }) => {
   const dbData = fs.readFileSync("BoatCoowner.json", "utf8");
   const db = JSON.parse(dbData);
   const user = db.Users.find((u) => u.email == email);
@@ -34,15 +22,38 @@ const isAuthorized = ({ email, password }) => {
   };
 };
 
+const authorize = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res
+      .status(401)
+      .json({ data: {}, status: 401, message: "Token not provided" });
+  }
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res
+        .status(401)
+        .json({ data: {}, status: 401, message: "Invalid token" });
+    }
+    const dbData = fs.readFileSync("BoatCoowner.json", "utf8");
+    const db = JSON.parse(dbData);
+    const user = db.Users.find((u) => u.id == decoded.id);
+    req.user = user;
+    // if (!decoded.roles.includes("admin")) {
+    //   return res
+    //     .status(403)
+    //     .json({ data: {}, status: 401, message: "Unauthorized" });
+    // }
+    next();
+  });
+};
+
 function generateToken(user) {
   const payload = {
     id: user.id,
     userEmail: user.email,
     age: user.age,
   };
-  console.log("====================================");
-  console.log("payload", payload);
-  console.log("====================================");
   const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
   return token;
 }
@@ -56,7 +67,7 @@ server.get("/", (req, res) => {
 });
 
 server.post("/login", (req, res) => {
-  const { user, bool, token } = isAuthorized(req.body);
+  const { user, bool, token } = genAuth(req.body);
   res.status(bool ? 200 : 404).json({
     data: {
       user: bool ? user : undefined,
@@ -65,6 +76,44 @@ server.post("/login", (req, res) => {
     message: bool ? "login success" : "login failed",
     status: bool ? 200 : 404,
   });
+});
+
+server.get("/AuthUserTest", authorize, (req, res) => {
+  res.status(200).json({
+    data: [],
+    message: "no message",
+    status: 200,
+  });
+});
+
+server.post("/approveBoatBookingRequest", authorize, (req, res) => {
+  const { bookingId } = req.body;
+  const filePath = "BoatCoowner.json";
+  try {
+    const dbData = fs.readFileSync(filePath, "utf8");
+    const db = JSON.parse(dbData);
+    const bookingIndex = db.BoatBookings.findIndex((u) => u.id == bookingId);
+    const booking = db.BoatBookings[bookingIndex];
+    if (!booking.NeedApprovalFrom.includes(req.user.id)) {
+      return res.status(403).json({ message: "Unauthorized", status: 403 });
+    }
+    if (booking.ApprovedBy.includes(req.user.id)) {
+      return res.status(400).json({ message: "Already approved", status: 400 });
+    }
+    booking.ApprovedBy.push(req.user.id);
+    booking.Approved = booking.NeedApprovalFrom.every((userId) =>
+      booking.ApprovedBy.includes(userId)
+    );
+    fs.writeFileSync(filePath, JSON.stringify(db, null, 2), "utf8");
+    res.status(200).json({
+      data: booking,
+      message: "Booking approved successfully",
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error", status: 500 });
+  }
 });
 
 server.use("/api", router);

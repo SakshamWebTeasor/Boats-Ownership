@@ -105,7 +105,7 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
         </div>
       </div>
       <div>
-        {Page!="Edit Profile" && <UserLoggedIn />}
+        {/* {Page!="Edit Profile" && <UserLoggedIn />} */}
       </div>
     </div>
   );
