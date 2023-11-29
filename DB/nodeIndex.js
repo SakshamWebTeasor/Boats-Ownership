@@ -116,6 +116,23 @@ server.post("/approveBoatBookingRequest", authorize, (req, res) => {
   }
 });
 
+server.post("/requestBoatBookingRequest", authorize, (req, res) => {
+  const { date } = req.body;
+
+  // implement logic for request booking here
+
+  try {
+    res.status(200).json({
+      data: date,
+      message: "Booking request created successfully",
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error", status: 500 });
+  }
+});
+
 server.use("/api", router);
 server.listen(3005, () => {
   console.log("JSON Server is running");

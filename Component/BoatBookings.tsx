@@ -4,6 +4,8 @@ import { User } from "@/pages/Users";
 import { useSelector } from "react-redux";
 import { ApiMainLink } from "./ApiLink";
 import { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function BoatBookings({
   ownerIds,
@@ -17,6 +19,10 @@ function BoatBookings({
   users: User[];
 }) {
   const [bookingS, setBookingS] = useState<BoatBooking[]>([]);
+  const [date, setDate] = useState(
+    new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
+  );
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   useEffect(() => {
     setBookingS(bookings);
   }, [bookings]);
@@ -33,7 +39,7 @@ function BoatBookings({
       });
       if (response.ok) {
         const { data }: { data: BoatBooking } = await response.json();
-        console.log(`Booking ${bookingId} approved successfully!`);
+        console.log(`Your Request Is Generated!`);
         setBookingS((prevData) => {
           return prevData.map((booking) => {
             if (booking.id === bookingId) {
@@ -52,11 +58,31 @@ function BoatBookings({
       console.error(`Error during approval: ${error}`);
     }
   };
+  const requestForBookingSlot = async (date: Date) => {
+    try {
+      const response = await fetch(`${ApiMainLink}/requestBoatBookingRequest`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ date }),
+      });
+      if (response.ok) {
+        const { data }: { data: Date } = await response.json();
+      } else {
+        console.error(`Error in request booking ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(`Error during approval: ${error}`);
+    }
+  };
+  const isBookRequestDisabled = !selectedDate;
   return (
     <div>
       {ownerIds.length > 0 && (
         <div>
-          <h3 className={styles.heading+" mt-3"}>All Bookings</h3>
+          <h3 className={styles.heading + " mt-3"}>All Bookings</h3>
           <table className={styles.table}>
             <thead>
               <tr className={styles.tr}>
@@ -138,7 +164,25 @@ function BoatBookings({
       {myUserIdExists.bool && ownerIds.length > 0 && (
         <div className="mt-5">
           <h3 className={styles.heading}>Request Booking of Slot</h3>
-          {/* Implement your booking form or calendar here */}
+          <DatePicker
+            showTimeSelect
+            minDate={new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)}
+            maxDate={new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000)}
+            minTime={new Date(0, 0, 0, 8, 0)}
+            maxTime={new Date(0, 0, 0, 23, 0)}
+            selected={date}
+            onChange={(date: Date) => {
+              setDate(date);
+              setSelectedDate(date);
+            }}
+          />
+          <button
+            className={styles.approvalButton}
+            onClick={() => requestForBookingSlot(date)}
+            disabled={isBookRequestDisabled}
+          >
+            Book Request
+          </button>
         </div>
       )}
     </div>
