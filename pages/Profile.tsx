@@ -4,7 +4,7 @@ import styles from "../styles/Profile.module.css";
 import ApiLink from "@/Component/ApiLink";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "@/Component/Header";
-// import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { loginSuccess } from "@/Component/redux/action";
 
 const ProfilePage = () => {
@@ -12,25 +12,18 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const [decoded, setDecoded] = useState<any>({});
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
-  const getDecodedVal = (data: any) => {
-    if (data?.token) {
-      // setDecoded(jwtDecode(user.token));
-    }
-  };
   const [username, setUsername] = useState("");
   const [imgLink, setImgLink] = useState("");
   const [age, setAge] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    if (user) {
-      setTimeout(() => {
-        setUsername(user.name || "");
-        setImgLink(user.imgLink || "");
-        setAge(user.age || 0);
-        getDecodedVal(user);
-      }, 100);
+    if (user?.token) {
+      const decodedToken = jwtDecode(user.token);   
+      setDecoded(decodedToken);
     }
   }, [user]);
+
   const handleUpdateProfile = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
