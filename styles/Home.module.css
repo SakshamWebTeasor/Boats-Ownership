@@ -7,6 +7,12 @@
   min-height: 100vh;
 }
 
+@media screen and (min-width: 1400px) {
+  .main {
+    padding: 6rem 12rem;
+  }
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -230,7 +236,15 @@
   margin-top: 8px;
   vertical-align: middle;
   width: 100%;
+  height: -webkit-fill-available;
 }
+
+/* .Home_column__6Bid1 img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  height: -webkit-fill-available;
+} */
 
 @media screen and (max-width: 1200px) {
   .column {

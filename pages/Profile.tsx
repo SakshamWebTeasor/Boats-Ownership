@@ -4,23 +4,31 @@ import styles from "../styles/Profile.module.css";
 import ApiLink from "@/Component/ApiLink";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "@/Component/Header";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { loginSuccess } from "@/Component/redux/action";
 
 const ProfilePage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [decoded, setDecoded] = useState<any>({});
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
-  const decoded: any = user?.token ? jwtDecode(user.token) : null;
-  const [username, setUsername] = useState(user?.name || "");
-  const [imgLink, setImgLink] = useState(user?.imgLink || "");
-  const [age, setAge] = useState(user?.age || 0);
+  const getDecodedVal = (data: any) => {
+    if (data?.token) {
+      // setDecoded(jwtDecode(user.token));
+    }
+  };
+  const [username, setUsername] = useState("");
+  const [imgLink, setImgLink] = useState("");
+  const [age, setAge] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (user) {
-      setUsername(user.name || "");
-      setImgLink(user.imgLink || "");
-      setAge(user.age || 0);
+      setTimeout(() => {
+        setUsername(user.name || "");
+        setImgLink(user.imgLink || "");
+        setAge(user.age || 0);
+        getDecodedVal(user);
+      }, 100);
     }
   }, [user]);
   const handleUpdateProfile = async (e: any) => {
