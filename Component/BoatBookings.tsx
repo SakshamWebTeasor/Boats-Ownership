@@ -6,6 +6,7 @@ import { ApiMainLink } from "./ApiLink";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/router";
 
 function BoatBookings({
   ownerIds,
@@ -18,14 +19,15 @@ function BoatBookings({
   bookings: BoatBooking[];
   users: User[];
 }) {
+  const router = useRouter();
   const [bookingS, setBookingS] = useState<BoatBooking[]>([]);
   const [date, setDate] = useState(
     new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)
   );
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000)
+  );
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  useEffect(() => {
-    setBookingS(bookings);
-  }, [bookings]);
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
   const handleApprovalClick = async (bookingId: number) => {
     try {
@@ -58,18 +60,22 @@ function BoatBookings({
       console.error(`Error during approval: ${error}`);
     }
   };
-  const requestForBookingSlot = async (date: Date) => {
+  const requestForBookingSlot = async (date: Date, endDate: Date) => {
     try {
+      const { id } = router.query;
       const response = await fetch(`${ApiMainLink}/requestBoatBookingRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ date }),
+        body: JSON.stringify({ date, endDate, boatId: id }),
       });
       if (response.ok) {
-        const { data }: { data: Date } = await response.json();
+        const { data }: { data: BoatBooking } = await response.json();
+        setBookingS((prevData) => {
+          return [...prevData, data];
+        });
       } else {
         console.error(`Error in request booking ${response.statusText}`);
       }
@@ -77,10 +83,19 @@ function BoatBookings({
       console.error(`Error during approval: ${error}`);
     }
   };
-  const isBookRequestDisabled = !selectedDate;
+  function getNextDate(currentDate: Date) {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+    return new Date(nextDate);
+  }
+  const isBookRequestDisabled = !selectedDate || !endDate;
+  useEffect(() => {
+    setBookingS(bookings);
+    setEndDate(getNextDate(date));
+  }, [bookings, date]);
   return (
     <div>
-      {ownerIds.length > 0 && (
+      {ownerIds.length > 0 && bookingS.length > 0 && (
         <div>
           <h3 className={styles.heading + " mt-3"}>All Bookings</h3>
           <table className={styles.table}>
@@ -89,17 +104,19 @@ function BoatBookings({
                 <th className={styles.th}>ID</th>
                 <th className={styles.th}>Requested By</th>
                 <th className={styles.th}>Date</th>
-                <th className={styles.th}>From&nbsp;-&nbsp;To</th>
+                <th className={styles.th}>
+                  From&nbsp;-&nbsp;To&nbsp;(MM-DD-YY HH:MM AA)
+                </th>
                 {myUserIdExists.bool && (
                   <>
                     <th className={styles.th}>Approved By</th>
                     <th className={styles.th}>Your Approval</th>
-                    <th className={styles.th}>Booking Status</th>
                   </>
                 )}
+                <th className={styles.th}>Booking Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={styles.tbody}>
               {bookingS.map((booking) => (
                 <tr className={styles.tr} key={booking.id}>
                   <td className={styles.td}>{booking.id}</td>
@@ -143,18 +160,16 @@ function BoatBookings({
                           </button>
                         </td>
                       )}
-                      <td
-                        className={styles.td}
-                        style={{
-                          backgroundColor: booking.Approved
-                            ? "green"
-                            : "orange",
-                        }}
-                      >
-                        {booking.Approved ? "Booked" : "Pending"}
-                      </td>
                     </>
                   )}
+                  <td
+                    className={styles.td}
+                    style={{
+                      backgroundColor: booking.Approved ? "green" : "orange",
+                    }}
+                  >
+                    {booking.Approved ? "Booked" : "Pending"}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -166,6 +181,8 @@ function BoatBookings({
           <h3 className={styles.heading}>Request Booking of Slot</h3>
           <DatePicker
             showTimeSelect
+            dateFormat="MMMM d, yyyy h:mm aa"
+            timeFormat="HH:mm"
             minDate={new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000)}
             maxDate={new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000)}
             minTime={new Date(0, 0, 0, 8, 0)}
@@ -176,9 +193,30 @@ function BoatBookings({
               setSelectedDate(date);
             }}
           />
+          &nbsp;-&nbsp;
+          <DatePicker
+            showTimeSelect
+            dateFormat="MMMM d, yyyy h:mm aa"
+            timeFormat="HH:mm"
+            minDate={
+              new Date(new Date(date).getTime() + 1 * 24 * 60 * 60 * 1000)
+            }
+            maxDate={
+              new Date(new Date(date).getTime() + 6 * 24 * 60 * 60 * 1000)
+            }
+            minTime={new Date(0, 0, 0, 0.5, 0)}
+            maxTime={new Date(0, 0, 0, 23.5, 0)}
+            selected={endDate}
+            onChange={(endDate: Date) => {
+              setEndDate(endDate);
+              setSelectedDate(endDate);
+            }}
+            disabled={!selectedDate}
+          />
+          &nbsp;
           <button
             className={styles.approvalButton}
-            onClick={() => requestForBookingSlot(date)}
+            onClick={() => requestForBookingSlot(date, endDate)}
             disabled={isBookRequestDisabled}
           >
             Book Request

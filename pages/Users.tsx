@@ -12,7 +12,7 @@ export interface User {
   name: string;
   age: string;
   imgLink: string;
-  email:string;
+  email: string;
 }
 
 interface UsersProps {
@@ -54,33 +54,40 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
                 <div>
                   <h3>Owned Boat</h3>
                   <ul className={styles.userList}>
-                    {UserOwnedBoat.map((boat) => {
-                      return (
-                        <li key={boat.id}>
-                          <p>
-                            Name:{" "}
+                    {UserOwnedBoat.length > 0 ? (
+                      UserOwnedBoat.map((boat) => {
+                        return (
+                          <li key={boat.id}>
+                            <p>
+                              Name:{" "}
+                              <Link
+                                href={`/Boat/${boat.id}`}
+                                style={{
+                                  color: "white",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                {boat.name}
+                              </Link>
+                            </p>
                             <Link
                               href={`/Boat/${boat.id}`}
                               style={{ color: "white", textDecoration: "none" }}
                             >
-                              {boat.name}
+                              <Image
+                                src={boat.ImgLink}
+                                alt={boat.name}
+                                className={styles.boatImage}
+                                width={750}
+                                height={750}
+                              />
                             </Link>
-                          </p>
-                          <Link
-                            href={`/Boat/${boat.id}`}
-                            style={{ color: "white", textDecoration: "none" }}
-                          >
-                            <Image
-                              src={boat.ImgLink}
-                              alt={boat.name}
-                              className={styles.boatImage}
-                              width={750}
-                              height={750}
-                            />
-                          </Link>
-                        </li>
-                      );
-                    })}
+                          </li>
+                        );
+                      })
+                    ) : (
+                      <p>No Boats Owned Yet</p>
+                    )}
                   </ul>
                 </div>
               </div>

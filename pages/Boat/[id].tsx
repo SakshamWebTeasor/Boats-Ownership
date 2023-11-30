@@ -137,10 +137,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id }: any = params;
   const res = await fetch(`${ApiLink}/Boats/${id}`);
   const boat: Boat = await res.json();
-
   const response = await fetch(`${ApiLink}/BoatBookings?boatId=${id}`);
   const bookingData: BoatBooking[] = await response.json();
-
   let urlForUsers: string = `${ApiLink}/Users?`;
   boat.OwnersUserId.map((id, index) => {
     let addAnd: boolean = boat.OwnersUserId.length - 1 !== index;

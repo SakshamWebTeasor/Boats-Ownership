@@ -40,3 +40,7 @@
   background-color: #dddddd;
   cursor: not-allowed;
 }
+
+.tbody {
+  background-color: darkblue;
+}
