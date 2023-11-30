@@ -79,14 +79,6 @@ const formatDate = (date) => {
   return { day, time };
 };
 
-function convertDate(date1, date2) {
-  const inputDate1 = new Date(date1);
-  const inputDate2 = new Date(date2);
-  const { day: dayStart, time: timeStart } = formatDate(inputDate1);
-  const { day: dayEnd, time: timeEnd } = formatDate(inputDate2);
-  return { dayStart, timeStart, dayEnd, timeEnd };
-}
-
 server.get("/", (req, res) => {
   res.status(200).json({
     data: [],
