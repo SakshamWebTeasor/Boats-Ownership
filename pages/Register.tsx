@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/Register.module.css";
 import ApiLink from "@/Component/ApiLink";
+import Header from "@/Component/Header";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -47,57 +48,67 @@ const RegisterPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister} className={styles.form}>
-        <label className={styles.label + " d-flex justify-content-between"}>
-          <span>Username:</span>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label + " d-flex justify-content-between"}>
-          <span>Image Link:</span>
-          <input
-            type="url"
-            value={imgLink}
-            onChange={(e) => setImgLink(e.target.value)}
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label + " d-flex justify-content-between"}>
-          <span>Age:</span>
-          <input
-            type="number"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label + " d-flex justify-content-between"}>
-          <span>Email:</span>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label + " d-flex justify-content-between"}>
-          <span>Password:</span>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-          />
-        </label>
-        <button type="submit" className={styles.button}>
-          Register
-        </button>
-      </form>
+      <div style={{ width: "95%", position: "fixed", top: "15px" }}>
+        <Header Page="Add Boat" PrePage="Home" />
+      </div>
+      <div
+        style={{
+          position: "relative",
+          top: "150px",
+        }}
+      >
+        <h1>Register</h1>
+        <form onSubmit={handleRegister} className={styles.form}>
+          <label className={styles.label + " d-flex justify-content-between"}>
+            <span>Username:</span>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={styles.input}
+            />
+          </label>
+          <label className={styles.label + " d-flex justify-content-between"}>
+            <span>Image Link:</span>
+            <input
+              type="url"
+              value={imgLink}
+              onChange={(e) => setImgLink(e.target.value)}
+              className={styles.input}
+            />
+          </label>
+          <label className={styles.label + " d-flex justify-content-between"}>
+            <span>Age:</span>
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              className={styles.input}
+            />
+          </label>
+          <label className={styles.label + " d-flex justify-content-between"}>
+            <span>Email:</span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+            />
+          </label>
+          <label className={styles.label + " d-flex justify-content-between"}>
+            <span>Password:</span>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+            />
+          </label>
+          <button type="submit" className={styles.button}>
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

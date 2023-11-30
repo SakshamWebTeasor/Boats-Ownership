@@ -4,6 +4,7 @@ import styles from "../styles/Register.module.css";
 import ApiLink from "@/Component/ApiLink";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import Header from "@/Component/Header";
 
 const AddBoatPage = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const AddBoatPage = () => {
   const [boatLocation, setBoatLocation] = useState("");
   const [boatPrice, setBoatPrice] = useState("");
   const [boatImgLink, setBoatImgLink] = useState("");
-  
+
   useEffect(() => {
     if (user?.token) {
       const decodedToken = jwtDecode(user.token);
@@ -57,81 +58,91 @@ const AddBoatPage = () => {
   };
   return (
     <div className={styles.container}>
-      <h1>Add Boat</h1>
-      {decoded.role == "admin" ? (
-        <form onSubmit={handleAddBoat} className={styles.form}>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Name:</span>
-            <input
-              type="text"
-              value={boatName}
-              onChange={(e) => setBoatName(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Type:</span>
-            <input
-              type="text"
-              value={boatType}
-              onChange={(e) => setBoatType(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Length:</span>
-            <input
-              type="number"
-              value={boatLength}
-              onChange={(e) => setBoatLength(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Capacity:</span>
-            <input
-              type="number"
-              value={boatCapacity}
-              onChange={(e) => setBoatCapacity(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Location:</span>
-            <input
-              type="text"
-              value={boatLocation}
-              onChange={(e) => setBoatLocation(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Price:</span>
-            <input
-              type="number"
-              value={boatPrice}
-              onChange={(e) => setBoatPrice(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <label className={styles.label + " d-flex justify-content-between"}>
-            <span>Boat Image Link:</span>
-            <input
-              type="url"
-              value={boatImgLink}
-              onChange={(e) => setBoatImgLink(e.target.value)}
-              className={styles.input}
-            />
-          </label>
-          <button type="submit" className={styles.button}>
-            Add Boat
-          </button>
-        </form>
-      ) : (
-        <>
-          <p>Only Admin Can Add Boats</p>
-        </>
-      )}
+      <div style={{ width: "95%", position: "fixed", top: "15px" }}>
+        <Header Page="Add Boat" PrePage="Home" />
+      </div>
+      <div
+        style={{
+          position: "relative",
+          top: "150px",
+        }}
+      >
+        <h1>Add Boat</h1>
+        {decoded.role == "admin" ? (
+          <form onSubmit={handleAddBoat} className={styles.form}>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Name:</span>
+              <input
+                type="text"
+                value={boatName}
+                onChange={(e) => setBoatName(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Type:</span>
+              <input
+                type="text"
+                value={boatType}
+                onChange={(e) => setBoatType(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Length:</span>
+              <input
+                type="number"
+                value={boatLength}
+                onChange={(e) => setBoatLength(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Capacity:</span>
+              <input
+                type="number"
+                value={boatCapacity}
+                onChange={(e) => setBoatCapacity(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Location:</span>
+              <input
+                type="text"
+                value={boatLocation}
+                onChange={(e) => setBoatLocation(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Price:</span>
+              <input
+                type="number"
+                value={boatPrice}
+                onChange={(e) => setBoatPrice(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label + " d-flex justify-content-between"}>
+              <span>Boat Image Link:</span>
+              <input
+                type="url"
+                value={boatImgLink}
+                onChange={(e) => setBoatImgLink(e.target.value)}
+                className={styles.input}
+              />
+            </label>
+            <button type="submit" className={styles.button}>
+              Add Boat
+            </button>
+          </form>
+        ) : (
+          <>
+            <p>Only Admin Can Add Boats</p>
+          </>
+        )}
+      </div>
     </div>
   );
 };
