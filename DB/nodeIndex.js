@@ -56,6 +56,7 @@ function generateToken(user) {
     id: user.id,
     userEmail: user.email,
     age: user.age,
+    role: user.role
   };
   const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
   return token;

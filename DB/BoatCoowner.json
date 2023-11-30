@@ -47,6 +47,18 @@
       "OwnersUserId": [3, 4],
       "Price": 1750,
       "ImgLink": "https://images.unsplash.com/photo-1541599773-711b4113029f"
+    },
+    {
+      "name": "Ocean Explorer",
+      "type": "Cruise Ship",
+      "length": 150.5,
+      "capacity": 3000,
+      "location": "Port City Marina",
+      "Price": 150000,
+      "Sold": false,
+      "OwnersUserId": [],
+      "ImgLink": "https://images.unsplash.com/photo-1550700077-dc057a824e27",
+      "id": 5
     }
   ],
   "Users": [
@@ -90,19 +102,19 @@
       "id": 5,
       "name": "Nebis",
       "email": "Nebis@gmail.com",
-      "age": 22,
-      "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
+      "age": 27,
+      "imgLink": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
       "password": "Nebis@123",
-      "role":"user"
+      "role": "user"
     },
     {
       "id": 5,
       "name": "Admin",
       "email": "Admin@gmail.com",
-      "age": 22,
-      "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
+      "age": 100,
+      "imgLink": "https://i.ibb.co/CsVVwYJ/Changing-the-default-admin-user-in-Word-Press1-e1462965535256.jpg",
       "password": "Admin@123",
-      "role":"admin"
+      "role": "admin"
     }
   ],
   "BoatsImage": [
