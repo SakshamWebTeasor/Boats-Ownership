@@ -100,7 +100,7 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(`${ApiLink}/Users`);
+  const res = await fetch(`${ApiLink}/Users?role=user`);
   const users: User[] = await res.json();
   const boatRes = await fetch(`${ApiLink}/Boats`);
   const boats: Boat[] = await boatRes.json();

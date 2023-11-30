@@ -20,10 +20,7 @@
       "capacity": 8,
       "location": "Riverfront Marina",
       "Sold": true,
-      "OwnersUserId": [
-        1,
-        2
-      ],
+      "OwnersUserId": [1, 2],
       "Price": 12000,
       "ImgLink": "https://images.unsplash.com/photo-1561728130-afd430af0493"
     },
@@ -47,10 +44,7 @@
       "capacity": 5,
       "location": "Harbor City",
       "Sold": true,
-      "OwnersUserId": [
-        3,
-        4
-      ],
+      "OwnersUserId": [3, 4],
       "Price": 1750,
       "ImgLink": "https://images.unsplash.com/photo-1541599773-711b4113029f"
     }
@@ -62,7 +56,8 @@
       "email": "Saksham@gmail.com",
       "age": 23,
       "imgLink": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f",
-      "password": "Saksham@123"
+      "password": "Saksham@123",
+      "role": "user"
     },
     {
       "id": 2,
@@ -70,7 +65,8 @@
       "email": "Mohit@gmail.com",
       "age": 24,
       "imgLink": "https://images.unsplash.com/photo-1584316712724-f5d4b188fee2",
-      "password": "Mohit@123"
+      "password": "Mohit@123",
+      "role": "user"
     },
     {
       "id": 3,
@@ -78,7 +74,8 @@
       "email": "Rohan@gmail.com",
       "age": 24,
       "imgLink": "https://images.unsplash.com/photo-1614950326208-f267d274c8df",
-      "password": "Rohan@123"
+      "password": "Rohan@123",
+      "role": "user"
     },
     {
       "id": 4,
@@ -86,7 +83,8 @@
       "email": "Debu@gmail.com",
       "age": 22,
       "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
-      "password": "Debu@123"
+      "password": "Debu@123",
+      "role": "user"
     },
     {
       "id": 5,
@@ -94,7 +92,17 @@
       "email": "Nebis@gmail.com",
       "age": 22,
       "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
-      "password": "Debu@123"
+      "password": "Nebis@123",
+      "role":"user"
+    },
+    {
+      "id": 5,
+      "name": "Admin",
+      "email": "Admin@gmail.com",
+      "age": 22,
+      "imgLink": "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049",
+      "password": "Admin@123",
+      "role":"admin"
     }
   ],
   "BoatsImage": [
@@ -117,13 +125,8 @@
       "To": "01-01-24, 11:00 AM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        1
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [1],
       "MustBeApproveBefore": "01-01-24",
       "createdAt": "29-11-23"
     },
@@ -136,13 +139,8 @@
       "To": "01-01-24, 12:00 PM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        1
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [1],
       "MustBeApproveBefore": "01-01-24",
       "createdAt": "29-11-23"
     },
@@ -155,14 +153,8 @@
       "To": "01-01-24, 13:00 PM",
       "Approved": true,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        1,
-        2
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [1, 2],
       "MustBeApproveBefore": "01-01-24",
       "createdAt": "29-11-23"
     },
@@ -175,13 +167,8 @@
       "To": "01-01-24, 14:00 PM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        2
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [2],
       "MustBeApproveBefore": "01-01-24",
       "createdAt": "29-11-23"
     },
@@ -193,13 +180,8 @@
       "To": "12-13-23, 11:00 PM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        2
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [2],
       "MustBeApproveBefore": "12-07-23",
       "createdAt": "11-30-23, 2:58 PM",
       "id": 5
@@ -212,14 +194,8 @@
       "To": "12-10-23, 2:00 PM",
       "Approved": true,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        3,
-        4
-      ],
-      "ApprovedBy": [
-        3,
-        4
-      ],
+      "NeedApprovalFrom": [3, 4],
+      "ApprovedBy": [3, 4],
       "MustBeApproveBefore": "12-08-23",
       "createdAt": "11-30-23, 3:13 PM",
       "id": 6
@@ -232,13 +208,8 @@
       "To": "01-06-24, 12:00 AM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        3,
-        4
-      ],
-      "ApprovedBy": [
-        4
-      ],
+      "NeedApprovalFrom": [3, 4],
+      "ApprovedBy": [4],
       "MustBeApproveBefore": "01-05-24",
       "createdAt": "11-30-23, 3:14 PM",
       "id": 7
@@ -251,13 +222,8 @@
       "To": "01-06-24, 12:00 AM",
       "Approved": false,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        3,
-        4
-      ],
-      "ApprovedBy": [
-        4
-      ],
+      "NeedApprovalFrom": [3, 4],
+      "ApprovedBy": [4],
       "MustBeApproveBefore": "01-05-24",
       "createdAt": "11-30-23, 3:14 PM",
       "id": 8
@@ -270,14 +236,8 @@
       "To": "12-19-23, 6:00 PM",
       "Approved": true,
       "Status": "Awaiting",
-      "NeedApprovalFrom": [
-        1,
-        2
-      ],
-      "ApprovedBy": [
-        1,
-        2
-      ],
+      "NeedApprovalFrom": [1, 2],
+      "ApprovedBy": [1, 2],
       "MustBeApproveBefore": "12-13-23",
       "createdAt": "11-30-23, 3:36 PM",
       "id": 9
