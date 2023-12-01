@@ -30,3 +30,15 @@
   border: none;
   border-radius: 5px;
 }
+
+.headerDiv {
+  width: 95%;
+  position: fixed;
+  top: 15px;
+  text-align: -webkit-center;
+}
+
+.bodyDiv {
+  top: 150px;
+  position: fixed;
+}

@@ -59,22 +59,10 @@ const AddBoatPage = () => {
   };
   return (
     <div className={styles.container}>
-      <div
-        style={{
-          width: "95%",
-          position: "fixed",
-          top: "15px",
-          textAlign: "-webkit-center",
-        }}
-      >
+      <div className={styles.headerDiv}>
         <Header Page="Add Boat" PrePage="Home" />
       </div>
-      <div
-        style={{
-          top: "150px",
-          position: "fixed",
-        }}
-      >
+      <div className={styles.bodyDiv}>
         <h1>Add Boat</h1>
         {decoded.role == "admin" ? (
           <form onSubmit={handleAddBoat} className={styles.form}>
