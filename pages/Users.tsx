@@ -52,12 +52,12 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
                   </Button>
                 </div>
                 <div>
-                  <h3>Owned Boat</h3>
+                  <h3>Owned Boats</h3>
                   <ul className={styles.userList}>
                     {UserOwnedBoat.length > 0 ? (
                       UserOwnedBoat.map((boat) => {
                         return (
-                          <li key={boat.id}>
+                          <li key={boat.id} className="mt-4">
                             <p>
                               Name:{" "}
                               <Link

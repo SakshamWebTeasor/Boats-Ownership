@@ -5,6 +5,7 @@ import ApiLink, { ApiMainLink } from "@/Component/ApiLink";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import Header from "@/Component/Header";
+import { showSwal } from "@/Component/SwalAlert";
 
 const AddBoatPage = () => {
   const router = useRouter();
@@ -39,7 +40,7 @@ const AddBoatPage = () => {
       OwnersUserId: [],
     };
     try {
-      const response = await fetch(`${ApiMainLink}/admin/addBoat`, {
+      const response:any = await fetch(`${ApiMainLink}/admin/addBoat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,11 +49,14 @@ const AddBoatPage = () => {
         body: JSON.stringify(boatData),
       });
       if (response.ok) {
+        showSwal("Boat Added", response?.message, 200, "/Boats", router);
         router.push("/Boats");
       } else {
+        showSwal("Boat Addition failed", response?.message, 400, undefined, router);
         console.error("Boat addition failed:", response.statusText);
       }
-    } catch (error) {
+    } catch (error:any) {
+      showSwal("Boat Addition failed", error?.response?.message, 400, undefined, router);
       console.error("Error during boat addition:", error);
     }
   };

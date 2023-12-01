@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ApiMainLink } from "@/Component/ApiLink";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/Component/redux/action";
+import { showSwal } from "@/Component/SwalAlert";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const LoginPage = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${ApiMainLink}/login`, {
+      const response: any = await fetch(`${ApiMainLink}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,11 +28,14 @@ const LoginPage = () => {
         const token = data.token;
         dispatch(loginSuccess({ ...data.data.user, token }));
         localStorage.setItem("token", token);
+        showSwal("Logged in successfully!", "success", 200, "/", router);
         router.push("/");
       } else {
+        showSwal("Login failed!", response?.message, 400, undefined, router);
         console.error("Login failed");
       }
-    } catch (error) {
+    } catch (error: any) {
+      showSwal("Login failed!", error?.response?.message, 400, undefined, router);
       console.error("Error during login:", error);
     }
   };

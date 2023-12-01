@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Register.module.css";
 import ApiLink from "@/Component/ApiLink";
 import Header from "@/Component/Header";
+import { showSwal } from "@/Component/SwalAlert";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const RegisterPage = () => {
       age: age,
     };
     try {
-      const response = await fetch(`${ApiLink}/Users`, {
+      const response:any = await fetch(`${ApiLink}/Users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,11 +31,13 @@ const RegisterPage = () => {
         body: JSON.stringify(userData),
       });
       if (response.ok) {
-        router.push("/");
+        showSwal("Success", "Registration successful", 200, "/", router);
       } else {
+        showSwal("Registration failed", response?.message, 500, undefined, router);
         console.error("Registration failed:", response.statusText);
       }
-    } catch (error) {
+    } catch (error:any) {
+      showSwal("Registration failed", error?.response?.message, 500, undefined, router);
       console.error("Error during registration:", error);
     }
     router.push("/");

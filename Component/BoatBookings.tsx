@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/router";
+import { showSwal } from "./SwalAlert";
 
 function BoatBookings({
   ownerIds,
@@ -31,7 +32,7 @@ function BoatBookings({
   const user = useSelector((state: any) => state.reducer.userLoggedIn);
   const handleApprovalClick = async (bookingId: number) => {
     try {
-      const response = await fetch(`${ApiMainLink}/approveBoatBookingRequest`, {
+      const response: any = await fetch(`${ApiMainLink}/approveBoatBookingRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,6 +41,7 @@ function BoatBookings({
         body: JSON.stringify({ bookingId }),
       });
       if (response.ok) {
+        showSwal("Approval Success", "Booking Approved",200, undefined, router);
         const { data }: { data: BoatBooking } = await response.json();
         setBookingS((prevData) => {
           return prevData.map((booking) => {
@@ -51,18 +53,20 @@ function BoatBookings({
           });
         });
       } else {
+        showSwal("Approval Failed", response?.message, 400, undefined, router);
         console.error(
           `Error approving booking ${bookingId}: ${response.statusText}`
         );
       }
-    } catch (error) {
+    } catch (error:any) {
+      showSwal("Approval Failed", error?.response?.message, 400, undefined, router);
       console.error(`Error during approval: ${error}`);
     }
   };
   const requestForBookingSlot = async (date: Date, endDate: Date) => {
     try {
       const { id } = router.query;
-      const response = await fetch(`${ApiMainLink}/requestBoatBookingRequest`, {
+      const response:any = await fetch(`${ApiMainLink}/requestBoatBookingRequest`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,13 +76,16 @@ function BoatBookings({
       });
       if (response.ok) {
         const { data }: { data: BoatBooking } = await response.json();
+        showSwal("Request Success", "Booking Request Successfully Made", 200, undefined, router);
         setBookingS((prevData) => {
           return [...prevData, data];
         });
       } else {
         console.error(`Error in request booking ${response.statusText}`);
+        showSwal("Request Failed", response?.message, 400, undefined, router);
       }
-    } catch (error) {
+    } catch (error:any) {
+      showSwal("Request Failed", error?.response?.message, 400, undefined, router);
       console.error(`Error during approval: ${error}`);
     }
   };

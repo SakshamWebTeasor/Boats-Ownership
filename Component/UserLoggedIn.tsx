@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "react-bootstrap";
 import Chatbox from "./ChatBox";
 import { useRouter } from "next/router";
+import { showSwal } from "./SwalAlert";
 
 const UserLoggedIn = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -15,11 +16,11 @@ const UserLoggedIn = () => {
   const toggleProfile = () => {
     setShowProfile(!showProfile);
   };
+  const router = useRouter();
   const handleLogout = () => {
     dispatch(logout());
+    showSwal("Logged out successfully!", "success", 200, "/", router);
   };
-
-  const router = useRouter();
 
   return (
     <div

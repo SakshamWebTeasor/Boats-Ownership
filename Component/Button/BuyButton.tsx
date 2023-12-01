@@ -3,8 +3,8 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import LoginModal from "../Modal/LoginModal";
 import { ApiMainLink } from "../ApiLink";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { showSwal } from "../SwalAlert";
+import { useRouter } from "next/router";
 
 interface BuyButtonProps {
   ownerIds: number[];
@@ -12,21 +12,11 @@ interface BuyButtonProps {
 }
 
 function BuyButton({ ownerIds, boatId }: BuyButtonProps) {
+  const router = useRouter();
   const loggedInUser = useSelector((state: any) => state.reducer.userLoggedIn);
   const [showModal, setShowModal] = useState(false);
   const handleLoginModalClose = () => {
     setShowModal(false);
-  };
-  const showSwal = (
-    errorTitle: string,
-    errorMessage: string,
-    status: number
-  ) => {
-    withReactContent(Swal).fire({
-      icon: status == 200 ? "success" : "error",
-      title: errorTitle,
-      text: errorMessage,
-    });
   };
   const handleBuyButtonClick = async () => {
     if (loggedInUser) {
@@ -46,12 +36,13 @@ function BuyButton({ ownerIds, boatId }: BuyButtonProps) {
         const data = await response.json();
         if (response.ok) {
           console.log("Boat bought successfully:", data.message);
-          showSwal("Buy Success", data.message, 200);
+          showSwal("Buy Success", data.message, data.status, "/Boats", router);
         } else {
           console.error("Failed to buy boat:", data.message);
-          showSwal("Failed to buy boat", data.message, 400);
+          showSwal("Buy Failed", data.message, data.status, undefined, router);
         }
-      } catch (error) {
+      } catch (error: any) {
+        showSwal("Buy Failed", error?.response?.message, 400, undefined, router);
         console.error("Error during buy action:", error);
       }
     } else {
