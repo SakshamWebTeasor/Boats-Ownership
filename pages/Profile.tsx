@@ -50,7 +50,6 @@ const ProfilePage = () => {
             password: undefined,
           })
         );
-        console.log("Profile updated successfully!");
         router.push("/");
       } else {
         console.error("Profile update failed:", response.statusText);

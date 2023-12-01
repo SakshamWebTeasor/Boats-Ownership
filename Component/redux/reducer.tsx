@@ -1,10 +1,7 @@
-// import { product } from '../../ProductWrapper';
 import {
     APIKEY,
   LOGIN_SUCCESS,
   LOGOUT,
-  // ADD_TO_CART,
-  // REMOVE_FROM_CART,
   SET_USER_DATA,
 } from "./constants";
 

@@ -1,5 +1,3 @@
-// AboutUs.tsx
-
 import React from "react";
 import styles from "../styles/About.module.css";
 import Header from "@/Component/Header";

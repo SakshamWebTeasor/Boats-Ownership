@@ -21,9 +21,7 @@ const RegisterPage = () => {
       imgLink: imgLink,
       age: age,
     };
-
     try {
-      // Make a POST request to the Users endpoint on JSON Server
       const response = await fetch(`${ApiLink}/Users`, {
         method: "POST",
         headers: {
@@ -31,10 +29,7 @@ const RegisterPage = () => {
         },
         body: JSON.stringify(userData),
       });
-
       if (response.ok) {
-        console.log("User registered successfully!");
-        // Redirect to the home page after successful registration
         router.push("/");
       } else {
         console.error("Registration failed:", response.statusText);
@@ -42,7 +37,6 @@ const RegisterPage = () => {
     } catch (error) {
       console.error("Error during registration:", error);
     }
-
     router.push("/");
   };
 

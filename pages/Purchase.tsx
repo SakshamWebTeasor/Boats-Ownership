@@ -12,7 +12,6 @@ import ApiLink from "@/Component/ApiLink";
 export const getStaticProps: GetStaticProps = async () => {
   const BoatsImage = await fetch(`${ApiLink}/BoatsImage`);
   const boatsImg: string[] = await BoatsImage.json();
-  console.log("boatsImg", boatsImg);
   return { props: { boatsImg } };
 };
 
@@ -78,8 +77,8 @@ export default function Purchase({
                   src={img}
                   alt={`Boat ${index + 1}`}
                   className={styles.boatImage}
-                  width={750}
-                  height={750}
+                  width={1050}
+                  height={1000}
                 />
               </SwiperSlide>
             ))}

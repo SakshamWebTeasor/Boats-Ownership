@@ -86,7 +86,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({
           src={boat.ImgLink}
           alt={boat.name}
           className={styles.boatImage}
-          width={750}
+          width={1050}
           height={750}
         />
         <BuyButton ownerIds={boat.OwnersUserId} />

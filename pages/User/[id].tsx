@@ -1,5 +1,3 @@
-// pages/Boat/[id].tsx
-
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -15,7 +13,7 @@ import ApiLink from "../../Component/ApiLink";
 import Image from "next/image";
 
 interface UserDetailProps {
-  boats: Boat[]; // Define your Boat interface here
+  boats: Boat[];
   user: User;
 }
 

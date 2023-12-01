@@ -96,8 +96,8 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                   src={boat.ImgLink}
                   alt={boat.name}
                   className={styles.boatImage}
-                  width={750}
-                  height={750}
+                  width={1050}
+                  height={1050}
                 />
               </li>
             );

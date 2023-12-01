@@ -48,7 +48,6 @@ const AddBoatPage = () => {
         body: JSON.stringify(boatData),
       });
       if (response.ok) {
-        console.log("Boat added successfully!");
         router.push("/Boats");
       } else {
         console.error("Boat addition failed:", response.statusText);

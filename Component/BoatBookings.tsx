@@ -41,7 +41,6 @@ function BoatBookings({
       });
       if (response.ok) {
         const { data }: { data: BoatBooking } = await response.json();
-        console.log(`Your Request Is Generated!`);
         setBookingS((prevData) => {
           return prevData.map((booking) => {
             if (booking.id === bookingId) {

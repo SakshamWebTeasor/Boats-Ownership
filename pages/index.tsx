@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
   const data = await res.json();
   const boatsImg: string[] = await BoatsImage.json();
   const repo = { ...data, boatsImg, ApiKey };
-  return { props: { repo }, revalidate: 60 }; // revalidate time in seconds
+  return { props: { repo }, revalidate: 60 };
 };
 
 export default function Home({

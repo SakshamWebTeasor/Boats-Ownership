@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import styles from "../styles/Login.module.css"; // Make sure to create this CSS file
+import styles from "../styles/Login.module.css";
 import Link from "next/link";
 import { ApiMainLink } from "@/Component/ApiLink";
 import { useDispatch } from "react-redux";
