@@ -232,8 +232,7 @@ server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
       status: 400,
     });
   }
-  const validImgLinkRegex =
-    /^(https:\/\/i\.ibb\.co|https:\/\/plus\.unsplash\.com|https:\/\/images\.unsplash\.com)/;
+  const validImgLinkRegex = /^(https:\/\/i\.ibb\.co|https:\/\/plus\.unsplash\.com|https:\/\/images\.unsplash\.com)/;
   if (!validImgLinkRegex.test(ImgLink)) {
     return res.status(400).json({
       data: {},

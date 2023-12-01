@@ -59,13 +59,20 @@ const AddBoatPage = () => {
   };
   return (
     <div className={styles.container}>
-      <div style={{ width: "95%", position: "fixed", top: "15px" }}>
+      <div
+        style={{
+          width: "95%",
+          position: "fixed",
+          top: "15px",
+          textAlign: "-webkit-center",
+        }}
+      >
         <Header Page="Add Boat" PrePage="Home" />
       </div>
       <div
         style={{
-          position: "relative",
           top: "150px",
+          position: "fixed",
         }}
       >
         <h1>Add Boat</h1>
