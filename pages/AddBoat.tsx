@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/Register.module.css";
-import ApiLink from "@/Component/ApiLink";
+import ApiLink, { ApiMainLink } from "@/Component/ApiLink";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import Header from "@/Component/Header";
@@ -39,10 +39,11 @@ const AddBoatPage = () => {
       OwnersUserId: [],
     };
     try {
-      const response = await fetch(`${ApiLink}/Boats`, {
+      const response = await fetch(`${ApiMainLink}/admin/addBoat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(boatData),
       });

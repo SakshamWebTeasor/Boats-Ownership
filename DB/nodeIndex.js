@@ -7,7 +7,7 @@ const express = require("express");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const middlewares = jsonServer.defaults();
-const ApiMainLink = "https://c2b0-27-255-222-177.ngrok-free.app";
+const ApiMainLink = "https://d398-124-253-1-205.ngrok-free.app";
 
 server.use(middlewares);
 server.use(express.json());
@@ -42,11 +42,32 @@ const authorize = (req, res, next) => {
     const db = JSON.parse(dbData);
     const user = db.Users.find((u) => u.id == decoded.id);
     req.user = user;
-    // if (!decoded.roles.includes("admin")) {
-    //   return res
-    //     .status(403)
-    //     .json({ data: {}, status: 401, message: "Unauthorized" });
-    // }
+    next();
+  });
+};
+
+const authorizeAdmin = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res
+      .status(401)
+      .json({ data: {}, status: 401, message: "Token not provided" });
+  }
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res
+        .status(401)
+        .json({ data: {}, status: 401, message: "Invalid token" });
+    }
+    const dbData = fs.readFileSync(filePath, "utf8");
+    const db = JSON.parse(dbData);
+    if (!decoded.role.includes("admin")) {
+      return res
+        .status(403)
+        .json({ data: {}, status: 401, message: "Unauthorized" });
+    }
+    const user = db.Users.find((u) => u.id == decoded.id);
+    req.user = user;
     next();
   });
 };
@@ -56,7 +77,7 @@ function generateToken(user) {
     id: user.id,
     userEmail: user.email,
     age: user.age,
-    role: user.role
+    role: user.role,
   };
   const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
   return token;
@@ -179,6 +200,58 @@ server.post("/requestBoatBookingRequest", authorize, async (req, res) => {
       res.status(response.status).json({
         data: response.data,
         message: "Booking request created successfully",
+        status: response.status,
+      });
+    } else {
+      console.error(`Error in request booking ${response.statusText}`);
+      res
+        .status(response.status)
+        .json({ message: response.statusText, status: response.status });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error", status: 500 });
+  }
+});
+
+server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
+  const boatData = req.body;
+  const { name, type, length, capacity, location, Price, ImgLink } = boatData;
+  if (!name || !type || !length || !capacity || !location || !Price || !ImgLink) {
+    const missingFields = [];
+    if (!name) missingFields.push("name");
+    if (!type) missingFields.push("type");
+    if (!length) missingFields.push("length");
+    if (!capacity) missingFields.push("capacity");
+    if (!location) missingFields.push("location");
+    if (!Price) missingFields.push("Price");
+    if (!ImgLink) missingFields.push("ImgLink");
+    return res.status(400).json({
+      data: {},
+      message: `The following fields are required: ${missingFields.join(", ")}`,
+      status: 400,
+    });
+  }
+  const validImgLinkRegex =
+    /^(https:\/\/i\.ibb\.co|https:\/\/plus\.unsplash\.com|https:\/\/images\.unsplash\.com)/;
+  if (!validImgLinkRegex.test(ImgLink)) {
+    return res.status(400).json({
+      data: {},
+      message:
+        "Invalid Image Link. Please provide a valid Image Link.",
+      status: 400,
+    });
+  }
+  let Sold = false;
+  let OwnersUserId = [];
+  const addedOn = formatDate(new Date());
+  try {
+    const newBoat = {name, type, length, capacity, location, Price, ImgLink, Sold, OwnersUserId, addedOn};
+    const response = await axios.post(`${ApiMainLink}/api/Boats`, newBoat);
+    if (response.status === 201) {
+      res.status(response.status).json({
+        data: response.data,
+        message: "Boat added successfully",
         status: response.status,
       });
     } else {
