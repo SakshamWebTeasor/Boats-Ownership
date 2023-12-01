@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "@/Component/Header";
 import { jwtDecode } from "jwt-decode";
 import { loginSuccess } from "@/Component/redux/action";
+import { showSwal } from "@/Component/SwalAlert";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const ProfilePage = () => {
       age: age,
     };
     try {
-      const response = await fetch(`${ApiLink}/Users/${decoded.id}`, {
+      const response:any = await fetch(`${ApiLink}/Users/${decoded.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -50,12 +51,14 @@ const ProfilePage = () => {
             password: undefined,
           })
         );
-        router.push("/");
+        showSwal("Profile Updated", "Profile updated successfully", 200, "/", router);
       } else {
+        showSwal("Profile Update Failed", response?.message, 400, undefined, router);
         console.error("Profile update failed:", response.statusText);
       }
       setIsLoading(false);
-    } catch (error) {
+    } catch (error:any) {
+      showSwal("Profile Update Failed", error?.response?.message, 400, undefined, router);
       console.error("Error during profile update:", error);
       setIsLoading(false);
     } finally {
