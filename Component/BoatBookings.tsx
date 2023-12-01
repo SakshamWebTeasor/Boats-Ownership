@@ -82,7 +82,7 @@ function BoatBookings({
         });
       } else {
         console.error(`Error in request booking ${response.statusText}`);
-        showSwal("Request Failed", response?.message, 400, undefined, router);
+        showSwal("Request Failed", response?.message, response.status, undefined, router);
       }
     } catch (error:any) {
       showSwal("Request Failed", error?.response?.message, 400, undefined, router);

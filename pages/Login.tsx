@@ -26,9 +26,9 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
+        showSwal("Logged in successfully!", "success", 200, "/", router);
         dispatch(loginSuccess({ ...data.data.user, token }));
         localStorage.setItem("token", token);
-        showSwal("Logged in successfully!", "success", 200, "/", router);
         router.push("/");
       } else {
         showSwal("Login failed!", response?.message, 400, undefined, router);

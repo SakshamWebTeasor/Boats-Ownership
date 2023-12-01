@@ -17,6 +17,7 @@ export const reducer = (state: any = initialState, action: any) => {
         userLoggedIn: action.payload,
       };
     case LOGOUT:
+      console.log('logging out');
       return {
         ...state,
         userLoggedIn: null,

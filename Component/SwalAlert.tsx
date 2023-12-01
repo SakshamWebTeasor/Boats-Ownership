@@ -9,13 +9,11 @@ export const showSwal = (
   router: any
 ) => {
   withReactContent(Swal).fire({
-    icon: (status>=200 && status<300) ? "success" : "error",
+    icon: status >= 200 && status < 300 ? "success" : "error",
     title: errorTitle,
     text: errorMessage,
   });
-  if (route == undefined) {
-    // router.push("/");
-  } else {
+  if (route != undefined) {
     setTimeout(() => {
       router.push(route);
     }, 1000);
