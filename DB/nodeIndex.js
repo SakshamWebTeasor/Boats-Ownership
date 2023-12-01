@@ -36,7 +36,14 @@ const authorize = (req, res, next) => {
     if (err) {
       return res
         .status(401)
-        .json({ data: {}, status: 401, message: "Invalid token" });
+        .json({ data: {}, status: 401, message: "Invalid token Or Expired" });
+    }
+    if (!decoded.role.includes("user")) {
+      return res.status(403).json({
+        data: {},
+        status: 401,
+        message: "Unauthorized, Please login as User",
+      });
     }
     const dbData = fs.readFileSync(filePath, "utf8");
     const db = JSON.parse(dbData);
@@ -57,15 +64,17 @@ const authorizeAdmin = (req, res, next) => {
     if (err) {
       return res
         .status(401)
-        .json({ data: {}, status: 401, message: "Invalid token" });
+        .json({ data: {}, status: 401, message: "Invalid token Or Expired" });
+    }
+    if (!decoded.role.includes("admin")) {
+      return res.status(403).json({
+        data: {},
+        status: 401,
+        message: "Unauthorized, Please login as Admin",
+      });
     }
     const dbData = fs.readFileSync(filePath, "utf8");
     const db = JSON.parse(dbData);
-    if (!decoded.role.includes("admin")) {
-      return res
-        .status(403)
-        .json({ data: {}, status: 401, message: "Unauthorized" });
-    }
     const user = db.Users.find((u) => u.id == decoded.id);
     req.user = user;
     next();
@@ -214,10 +223,55 @@ server.post("/requestBoatBookingRequest", authorize, async (req, res) => {
   }
 });
 
+server.post("/BuyBoat", authorize, async (req, res) => {
+  const { boatId } = req.body;
+  if (!boatId) {
+    return res.status(400).json({
+      data: {},
+      message: "boatId is a required fields",
+      status: 400,
+    });
+  }
+  try {
+    let url = `${ApiMainLink}/api/Boats/${boatId}`;
+    const response = await axios.get(url);
+    let gotBoat = response.data;
+    if (gotBoat.OwnersUserId.includes(req.user.id)) {
+      return res.status(400).json({
+        data: {},
+        message: "You already bought this boat, cannot buy again",
+        status: 400,
+      });
+    }
+    gotBoat.OwnersUserId = [...gotBoat.OwnersUserId, req.user.id];
+    const updateBoatOwners = await axios.patch(url, {
+      OwnersUserId: gotBoat.OwnersUserId,
+    });
+    return res.status(updateBoatOwners.status).json({
+      data: updateBoatOwners.data,
+      message: "the Boat is bought successfully",
+      status: updateBoatOwners.status,
+    });
+  } catch (error) {
+    res.status(error.response.status).json({
+      message: "Boat with id:" + boatId + " " + error.response.statusText,
+      status: error.response.status,
+    });
+  }
+});
+
 server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
   const boatData = req.body;
   const { name, type, length, capacity, location, Price, ImgLink } = boatData;
-  if (!name || !type || !length || !capacity || !location || !Price || !ImgLink) {
+  if (
+    !name ||
+    !type ||
+    !length ||
+    !capacity ||
+    !location ||
+    !Price ||
+    !ImgLink
+  ) {
     const missingFields = [];
     if (!name) missingFields.push("name");
     if (!type) missingFields.push("type");
@@ -232,12 +286,12 @@ server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
       status: 400,
     });
   }
-  const validImgLinkRegex = /^(https:\/\/i\.ibb\.co|https:\/\/plus\.unsplash\.com|https:\/\/images\.unsplash\.com)/;
+  const validImgLinkRegex =
+    /^(https:\/\/i\.ibb\.co|https:\/\/plus\.unsplash\.com|https:\/\/images\.unsplash\.com)/;
   if (!validImgLinkRegex.test(ImgLink)) {
     return res.status(400).json({
       data: {},
-      message:
-        "Invalid Image Link. Please provide a valid Image Link.",
+      message: "Invalid Image Link. Please provide a valid Image Link.",
       status: 400,
     });
   }
@@ -245,7 +299,18 @@ server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
   let OwnersUserId = [];
   const addedOn = formatDate(new Date());
   try {
-    const newBoat = {name, type, length, capacity, location, Price, ImgLink, Sold, OwnersUserId, addedOn};
+    const newBoat = {
+      name,
+      type,
+      length,
+      capacity,
+      location,
+      Price,
+      ImgLink,
+      Sold,
+      OwnersUserId,
+      addedOn,
+    };
     const response = await axios.post(`${ApiMainLink}/api/Boats`, newBoat);
     if (response.status === 201) {
       res.status(response.status).json({
@@ -261,7 +326,10 @@ server.post("/admin/addBoat", authorizeAdmin, async (req, res) => {
     }
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Internal Server Error", status: 500 });
+    res.status(error.response.status).json({
+      message: error.response.statusText,
+      status: error.response.status,
+    });
   }
 });
 

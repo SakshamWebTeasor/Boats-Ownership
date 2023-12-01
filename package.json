@@ -28,6 +28,8 @@
     "redux-saga": "^1.2.3",
     "redux-toolkit": "^1.1.2",
     "sharp": "^0.32.6",
+    "sweetalert2": "^11.10.1",
+    "sweetalert2-react-content": "^5.0.7",
     "swiper": "^11.0.5"
   },
   "devDependencies": {

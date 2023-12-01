@@ -89,7 +89,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({
           width={1050}
           height={750}
         />
-        <BuyButton ownerIds={boat.OwnersUserId} />
+        <BuyButton ownerIds={boat.OwnersUserId} boatId={boat.id} />
         <BoatBookings
           ownerIds={boat.OwnersUserId}
           myUserIdExists={{bool:boat.OwnersUserId.includes(decoded?.id),myId:decoded?.id}}
