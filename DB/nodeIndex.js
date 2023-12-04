@@ -7,7 +7,7 @@ const express = require("express");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const middlewares = jsonServer.defaults();
-const ApiMainLink = "https://3e5c-27-255-223-195.ngrok-free.app";
+const ApiMainLink = "https://4c77-124-253-246-21.ngrok-free.app";
 
 server.use(middlewares);
 server.use(express.json());

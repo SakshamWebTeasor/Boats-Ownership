@@ -4,7 +4,7 @@
 // const apiKey = process.env.API_KEY;
 // const apiUrl = process.env.API_URL;
 
-export const ApiMainLink = "https://3e5c-27-255-223-195.ngrok-free.app";
+export const ApiMainLink = "https://4c77-124-253-246-21.ngrok-free.app";
 export const ApiLink = ApiMainLink + "/api";
 export const apiUrl = "https://api.openai.com/v1/chat/completions";
 
