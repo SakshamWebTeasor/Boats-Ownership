@@ -46,7 +46,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ boats, user }) => {
               <strong>Age:</strong> {user.age}
             </p>
           </div>
-          <Image loading="lazy"
+          <Image
             src={user.imgLink}
             alt={user.name}
             className={styles.userImage}

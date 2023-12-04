@@ -82,7 +82,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({
             <Owners users={users} />
           </div>
         )}
-        <Image loading="lazy"
+        <Image
           src={boat.ImgLink}
           alt={boat.name}
           className={styles.boatImage}

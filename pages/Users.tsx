@@ -74,7 +74,7 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
                               href={`/Boat/${boat.id}`}
                               style={{ color: "white", textDecoration: "none" }}
                             >
-                              <Image loading="lazy"
+                              <Image
                                 src={boat.ImgLink}
                                 alt={boat.name}
                                 className={styles.boatImage}

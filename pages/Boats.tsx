@@ -42,7 +42,7 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
       <Header Page="Boats" PrePage="Home" />
       <ul className={styles.boatList}>
         {boats.length > 0 ? (
-          boats.map((boat) => {
+          boats.map((boat, index) => {
             return (
               <li key={boat.id} className={styles.boatItem}>
                 <div className="d-flex flex-direction-column justify-content-between">
@@ -92,12 +92,13 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                     )}
                   </div>
                 </div>
-                <Image loading="lazy"
+                <Image
                   src={boat.ImgLink}
                   alt={boat.name}
                   className={styles.boatImage}
                   width={1050}
                   height={1050}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               </li>
             );
