@@ -33,7 +33,7 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
             <li key={user.id} className={styles.userItem}>
               <div className="d-flex flex-direction-column justify-content-between">
                 <div>
-                  <Image
+                  <Image loading="lazy"
                     src={user.imgLink}
                     alt={user.name}
                     className={styles.userImage}
@@ -74,7 +74,7 @@ const Users: React.FC<UsersProps> = ({ users, boats }) => {
                               href={`/Boat/${boat.id}`}
                               style={{ color: "white", textDecoration: "none" }}
                             >
-                              <Image
+                              <Image loading="lazy"
                                 src={boat.ImgLink}
                                 alt={boat.name}
                                 className={styles.boatImage}

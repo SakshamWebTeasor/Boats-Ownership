@@ -92,7 +92,7 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                     )}
                   </div>
                 </div>
-                <Image
+                <Image loading="lazy"
                   src={boat.ImgLink}
                   alt={boat.name}
                   className={styles.boatImage}
