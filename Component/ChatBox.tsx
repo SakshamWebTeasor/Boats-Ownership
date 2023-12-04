@@ -44,7 +44,7 @@ const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
         </Button>
         {loading && (
           <span className="px-5">
-            <Image loading="lazy"
+            <Image
               src="https://i.ibb.co/LZDhRc6/g0R5.gif"
               alt="Loading Logo"
               width={50}

@@ -53,7 +53,7 @@ export default function Home({
                 styles.show700None + " d-flex justify-content-center d-md-none"
               }
             >
-              <Image loading="lazy"
+              <Image
                 className={styles.logo + ""}
                 src="/BoatsLogo/SimpleB.png"
                 alt="Next.js Logo"
@@ -70,7 +70,7 @@ export default function Home({
               rel="noopener noreferrer"
             >
               Built By{" "}
-              <Image loading="lazy"
+              <Image
                 src="/icon-512x512.png"
                 alt="Vercel Logo"
                 className={styles.vercelLogo}
@@ -82,7 +82,7 @@ export default function Home({
           </div>
         </div>
         <div className={styles.center}>
-          <Image loading="lazy"
+          <Image
             className={styles.logo}
             src="/BoatsLogo/SimpleB.png"
             alt="Next.js Logo"
@@ -95,7 +95,8 @@ export default function Home({
         <div className={styles.row}>
           {repo.boatsImg?.map((img, index) => (
             <div key={index} className={styles.column}>
-              <Image loading="eager"
+              <Image
+                loading="eager"
                 src={img}
                 alt={`Boat ${index + 1}`}
                 className={styles.boatImage}

@@ -59,7 +59,7 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
           )}
           <span>
             <Link href="/" style={{ color: "white", textDecoration: "none" }}>
-              <Image loading="lazy"
+              <Image
                 className={styles.logo + " mx-3"}
                 src="/BoatsLogo/SimpleW.png"
                 alt="Next.js Logo"
@@ -93,7 +93,7 @@ function Header({ Page, PrePage }: { Page: string; PrePage: string }) {
             </Link>
           </Button>
           <Link href="/" style={{ color: "white", textDecoration: "none" }}>
-            <Image loading="lazy"
+            <Image
               className={styles.logo}
               src="/BoatsLogo/SimpleW.png"
               alt="Next.js Logo"
