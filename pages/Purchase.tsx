@@ -73,7 +73,7 @@ export default function Purchase({
             {boatsImg?.map((img: string, index: number) => (
               <SwiperSlide key={index}>
                 {" "}
-                <Image loading="lazy"
+                <Image loading="eager"
                   src={img}
                   alt={`Boat ${index + 1}`}
                   className={styles.boatImage}

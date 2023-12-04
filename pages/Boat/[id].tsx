@@ -82,7 +82,7 @@ const BoatDetail: React.FC<BoatDetailProps> = ({
             <Owners users={users} />
           </div>
         )}
-        <Image
+        <Image loading="eager"
           src={boat.ImgLink}
           alt={boat.name}
           className={styles.boatImage}
@@ -117,7 +117,7 @@ const Owners: React.FC<{ users: User[] }> = ({ users }) => {
                 {user.name}
               </Link>
               <Link href={`/User/${user.id}`}>
-                <Image loading="lazy"
+                <Image loading="eager"
                   src={user.imgLink}
                   alt={user.name}
                   className={styles2.userImage}

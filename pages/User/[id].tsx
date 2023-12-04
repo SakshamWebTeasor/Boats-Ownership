@@ -46,7 +46,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ boats, user }) => {
               <strong>Age:</strong> {user.age}
             </p>
           </div>
-          <Image
+          <Image loading="eager"
             src={user.imgLink}
             alt={user.name}
             className={styles.userImage}
@@ -80,7 +80,7 @@ const OwnedBoats: React.FC<UserDetailProps> = ({ boats, user }) => {
                 <p>Type: {boat.type}</p>
               </div>
               <Link href={`/Boat/${boat.id}`}>
-                <Image loading="lazy"
+                <Image loading="eager"
                     src={boat.ImgLink}
                     alt={boat.name}
                     className={styles2.boatImage}

@@ -98,7 +98,7 @@ const Boats: React.FC<BoatsProps> = ({ boats, users }) => {
                   className={styles.boatImage}
                   width={1050}
                   height={1050}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="eager"
                 />
               </li>
             );
