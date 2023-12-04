@@ -100,8 +100,8 @@ export default function Home({
                 src={img}
                 alt={`Boat ${index + 1}`}
                 className={styles.boatImage}
-                width={(index == 7 || index == 2) ? 550 : 750}
-                height={(index == 7 || index == 2) ? 550 : 750}
+                width={(index == 7 || index == 3) ? 550 : 750}
+                height={(index == 7 || index == 3) ? 550 : 750}
               />
             </div>
           ))}
