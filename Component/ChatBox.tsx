@@ -30,14 +30,15 @@ const Chatbox = ({ ApiKey }: { ApiKey: string }) => {
   return (
     <div className={styles.chatbox + " " + additionalClass}>
       <div className={styles.chatIcon}>
-        💬 Say Hello To My New Bot
+        <label htmlFor="userChatInput">💬 Say Hello To My New Bot</label>
         <input
           style={{ width: "100%" }}
-          onChange={(e) => changeInput(e)}
-          type={"text"}
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
           className={styles.chatInput}
           value={input}
-        ></input>
+          id="userChatInput"
+        />
         <Button className="mt-3" onClick={(e) => getResponse()}>
           Send
         </Button>
