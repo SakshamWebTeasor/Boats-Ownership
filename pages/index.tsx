@@ -95,7 +95,7 @@ export default function Home({
         <div className={styles.row}>
           {repo.boatsImg?.map((img, index) => (
             <div key={index} className={styles.column}>
-              <Image loading="lazy"
+              <Image loading="eager"
                 src={img}
                 alt={`Boat ${index + 1}`}
                 className={styles.boatImage}
